@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Admin from '../models/admin.model';
-import Username from '../models/username.model';
+import User from '../models/user.model';
 import config from '../config';
 
 // Crear administrador
@@ -64,7 +64,7 @@ export const getAdminUserPass = async (req, res) => {
         admin.password
     );
 
-    // Si la validacion de contraseñaes incorrecta
+    // Si la validacion de contraseña es incorrecta
     if (!validPassword) {
         return res.json({
             auth: false,
@@ -73,6 +73,7 @@ export const getAdminUserPass = async (req, res) => {
         });
     }
 
+    // Se crea token que expira en 2 horas 
     const token = jwt.sign({ id: admin._id }, config.secret, {
         expiresIn: 60 * 60 * 2,
     });
@@ -83,6 +84,7 @@ export const getAdminUserPass = async (req, res) => {
         id: admin._id,
         token,
         rol: admin.rol,
+        nombre: admin.nombre,
     });
 };
 
@@ -191,7 +193,7 @@ export const deleteAdmin = async (req, res) => {
 // Consultar usuarios
 export const getUser = async (req, res) => {
     try {
-        const response = await Username.find();
+        const response = await User.find();
         if (!response) {
             return res.status(404).json({
                 auth: true,
@@ -210,20 +212,56 @@ export const getUser = async (req, res) => {
     }
 };
 
+//prueba de multi archivo
+export const arch = async (req, res) => {
+    console.log(req.body);
+    const img = [];
+    req.files.img.map((file, index) => {
+        img.push({
+            name: `proyect${index}`,
+            data: file.buffer,
+            contentType: file.mimetype,
+        });
+    });
+
+    const user = new User({ img });
+    // console.log(user);
+    await user.save();
+};
+
+// Ver imagenes
+export const viewImg = async (req, res) => {
+    const _id = req.query.id;
+    const name = req.query.name;
+
+    try {
+        // const resp = await User.findOne({ _id }, { img: 1 });
+        // const { data, contentType } = resp.img.find(
+        //     (file) => file.name === name
+        // );
+        // res.set('Content-Type', contentType);
+        // res.send(data);
+    } catch (error) {
+        return res.status(400).json({
+            mensaje: 'Ocurrio un error',
+            error,
+        });
+    }
+};
+
 // Modificar datos de usuarios
 export const updateUser = async (req, res) => {
     const _id = req.params.id;
     const {
-        nombre,
-        mail,
+        email,
         password,
-        direccion,
-        telefono,
-        actividad,
-        msg_description,
-        departamento,
-        ciudad,
-        visible,
+        rol,
+        nombre,
+        avatar,
+        aboutme,
+        service,
+        recentproyects,
+        contacinfo,
     } = req.body;
 
     let body = {};
@@ -240,7 +278,7 @@ export const updateUser = async (req, res) => {
             mail,
             password,
             direccion,
-            departamento,
+            pais,
             ciudad,
             telefono,
             actividad,
@@ -257,7 +295,7 @@ export const updateUser = async (req, res) => {
             body['password'] = user.password;
         }
         if (user.ciudad !== '') body['ciudad'] = user.ciudad;
-        if (user.departamento !== '') body['departamento'] = user.departamento;
+        if (user.pais !== '') body['pais'] = user.pais;
         if (user.direccion !== '') body['direccion'] = user.direccion;
         if (user.telefono !== '') body['telefono'] = user.telefono;
         if (user.actividad !== '') body['actividad'] = user.actividad;
@@ -270,7 +308,7 @@ export const updateUser = async (req, res) => {
             mail,
             password,
             direccion,
-            departamento,
+            pais,
             ciudad,
             telefono,
             actividad,
@@ -286,14 +324,10 @@ export const updateUser = async (req, res) => {
             body['password'] = user.password;
         }
         if (user.ciudad !== '') body['ciudad'] = user.ciudad;
-        if (user.departamento !== '')
-            body['departamento'] = user.departamento;
-        if (user.direccion !== '')
-            body['direccion'] = user.direccion;
-        if (user.telefono !== '')
-            body['telefono'] = user.telefono;
-        if (user.actividad !== '')
-            body['actividad'] = user.actividad;
+        if (user.pais !== '') body['pais'] = user.pais;
+        if (user.direccion !== '') body['direccion'] = user.direccion;
+        if (user.telefono !== '') body['telefono'] = user.telefono;
+        if (user.actividad !== '') body['actividad'] = user.actividad;
         if (user.msg_description !== '')
             body['msg_description'] = user.msg_description;
 
@@ -301,7 +335,7 @@ export const updateUser = async (req, res) => {
     }
 
     try {
-        const registro = await Username.findByIdAndUpdate(_id, body, {
+        const registro = await User.findByIdAndUpdate(_id, body, {
             new: true,
         });
         res.status(200).json({
@@ -321,7 +355,7 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     const _id = req.params.id;
     try {
-        const response = await Username.findByIdAndDelete({ _id });
+        const response = await User.findByIdAndDelete({ _id });
 
         if (!response) {
             return res

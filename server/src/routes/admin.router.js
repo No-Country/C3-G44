@@ -9,14 +9,28 @@ import {
     getUser,
     updateUser,
     deleteUser,
+    arch,
+    viewImg
 } from '../controller/admin.controller';
 import { verifyToken } from '../libs/VerifyToken'
 import { upload } from '../libs/ImageMulter';
 
 const router = Router();
 
+// Prueba archivos 
+router.post(
+    '/arch',
+    upload.fields([
+        { name: 'img', maxCount: 10 },
+    ]),
+    arch
+);
+
+// Ver imagenes
+router.get('/img', viewImg)
+
 // Crea Administrador
-router.post('/create', createAdmin);
+router.post('/create', verifyToken, createAdmin);
 
 // Consulta todos los Administradores
 router.get('/find', verifyToken, getAdmin);

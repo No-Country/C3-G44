@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const AdminSchema = new Schema({
-    nombre: { type: String, required: false, max: 40 },
+    nombre: { type: String, required: true, max: 40 },
     user: { type: String, required: true, max: 100 },
     password: { type: String, required: true, max: 15, select: false },
     rol: { type: String, required: true, max: 15 },

@@ -1,4 +1,4 @@
-import User from '../models/username.model';
+import User from '../models/user.model';
 import jwt from 'jsonwebtoken';
 import config from '../config';
 import path from 'path';
@@ -7,34 +7,25 @@ import path from 'path';
 export const createUser = async (req, res) => {
     try {
         const {
-            nombre,
             email,
             password,
-            direccion,
-            ciudad,
-            pais,
-            telefono,
+            nombreCompleto,
         } = req.body;
 
         let avatar;
 
         if (req.file) {
             const data = req.file.buffer;
-            // const data = req.body.avatar; // Postman
             const contentType = req.file.mimetype;
-            // const contentType = req.body.avatar.type; //Postman
             avatar = { data, contentType };
         }
 
         const user = new User({
-            nombre,
             email,
             password,
-            direccion,
-            ciudad,
-            pais,
-            telefono,
+            nombreCompleto,
             avatar,
+            rol: 'user'
         });
 
         const correo = await User.findOne({ email });
@@ -72,11 +63,11 @@ export const createUser = async (req, res) => {
 
 // Consulta base de datos por email y password Login
 export const getUserMailPass = async (req, res) => {
+    // Consulto usuario por email si lo encuentra devuelve datos de usuario
     const user = await User.findOne(
         {
             email: req.body.email,
         },
-        { avatar: 0 }
     ).select('+password');
 
     // Verifico si no se encontro el email en base de datos
@@ -84,6 +75,7 @@ export const getUserMailPass = async (req, res) => {
         return res.json({ auth: false, mensaje: 'Email no esta registrado' });
     }
 
+    // Si el usuario existe comparo contraseña
     const validPassword = await user.comparePassword(
         req.body.password,
         user.password
@@ -98,6 +90,7 @@ export const getUserMailPass = async (req, res) => {
         });
     }
 
+    // Si la contraseña es correcta creo token por 2 horas 
     const token = jwt.sign({ id: user._id }, config.secret, {
         expiresIn: 60 * 60 * 2,
     });
@@ -105,7 +98,7 @@ export const getUserMailPass = async (req, res) => {
         auth: true,
         mensaje: 'Bienvenido ' + user.nombre,
         token,
-        user,
+        rol: user.rol
     });
 };
 
@@ -288,4 +281,59 @@ export const terminos = async (req, res) => {
             console.log('Sent:', fileName);
         }
     });
+};
+
+// Prueba de imagenes en array 
+export const createImg = async (req, res) => {
+    console.log(req.body);
+
+    const { email, password, user } = req.body;
+    console.log(email, password, user);
+
+    try {
+        const img = req.files.img.map((file, index) => {
+            const data = file.buffer;
+            const contentType = file.mimetype;
+            const name = `proyect${index}`;
+            return { data, contentType, name };
+        });
+
+        const username = new User({
+            img,
+            rol: 'user',
+            email,
+            password,
+            user,
+        });
+
+        await username.save();
+
+        res.status(200).json({
+            mensaje: 'Registro exitoso',
+        });
+    } catch (error) {
+        console.log(error);
+        return res
+            .status(500)
+            .json({ auth: true, mensaje: 'Ocurrio un error', error });
+    }
+};
+
+// Ver imagenes
+export const viewImg = async (req, res) => {
+    const _id = req.query.id;
+    const name = req.query.name;
+
+    try {
+        const resp = await User.findOne({ _id }, { img: 1 });
+        // console.log(resp.img[0].contentType)
+        const img = resp.img.find((file) => file.name === name);
+        res.set('Content-Type', img.contentType);
+        res.send(img.data);
+    } catch (error) {
+        return res.status(400).json({
+            mensaje: 'Ocurrio un error',
+            error,
+        });
+    }
 };
