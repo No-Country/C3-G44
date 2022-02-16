@@ -73,7 +73,7 @@ export const getAdminUserPass = async (req, res) => {
         });
     }
 
-    // Se crea token que expira en 2 horas 
+    // Se crea token que expira en 2 horas
     const token = jwt.sign({ id: admin._id }, config.secret, {
         expiresIn: 60 * 60 * 2,
     });
@@ -124,16 +124,28 @@ export const findAdminId = async (req, res) => {
 // Modificar administrador
 export const updateAdmin = async (req, res) => {
     const _id = req.params.id;
-    const { nombre, user, password } = req.body;
+    const { password } = req.body;
 
     const admin = new Admin({
-        nombre,
-        user,
-        password,
+        ...req.body,
     });
 
-    // Se encripta contraseña
-    admin.password = await admin.encryptPassword(password);
+    // Se encripta contraseña si la contraseña existe
+    if (password && password !== '') {
+        admin.password = await admin.encryptPassword(password);
+    } else {
+        admin.password = undefined;
+    }
+
+    // Verifica si existe user
+    if (!admin.user && admin.user === '') {
+        admin.user = undefined;
+    }  
+
+    // Verifica si existe nombre
+    if (!admin.nombre && admin.nombre === '') {
+        admin.nombre = undefined;
+    }  
 
     const data = {
         nombre: admin.nombre,

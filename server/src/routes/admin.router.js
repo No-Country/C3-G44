@@ -17,17 +17,11 @@ import { upload } from '../libs/ImageMulter';
 
 const router = Router();
 
-// Prueba archivos 
-router.post(
-    '/arch',
-    upload.fields([
-        { name: 'img', maxCount: 10 },
-    ]),
-    arch
-);
-
 // Ver imagenes
 router.get('/img', viewImg)
+
+// login de Administrador
+router.post('/login', getAdminUserPass);
 
 // Crea Administrador
 router.post('/create', verifyToken, createAdmin);
@@ -35,11 +29,8 @@ router.post('/create', verifyToken, createAdmin);
 // Consulta todos los Administradores
 router.get('/find', verifyToken, getAdmin);
 
-// login de Administrador
-router.post('/login', getAdminUserPass);
-
 // Busca Administrador por id
-router.get('/findid/:id', verifyToken, findAdminId);
+router.get('/find/:id', verifyToken, findAdminId);
 
 // Actualiza Administrador
 router.put('/update/:id', verifyToken, updateAdmin);

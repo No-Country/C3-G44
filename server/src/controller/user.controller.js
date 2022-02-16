@@ -96,7 +96,7 @@ export const getUserMailPass = async (req, res) => {
     });
     res.status(200).json({
         auth: true,
-        mensaje: 'Bienvenido ' + user.nombre,
+        mensaje: 'Bienvenido ' + user.nombreCompleto,
         token,
         rol: user.rol
     });
