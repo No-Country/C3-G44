@@ -140,13 +140,14 @@ export const updateAdmin = async (req, res) => {
     // Verifica si existe user
     if (!admin.user && admin.user === '') {
         admin.user = undefined;
-    }  
+    }
 
     // Verifica si existe nombre
     if (!admin.nombre && admin.nombre === '') {
         admin.nombre = undefined;
-    }  
+    }
 
+    // pasando el admin sin object _id
     const data = {
         nombre: admin.nombre,
         user: admin.user,
@@ -166,7 +167,7 @@ export const updateAdmin = async (req, res) => {
         }
         res.status(200).json({
             auth: true,
-            mensaje: 'Se modifico usuario correctamente',
+            mensaje: 'Se modifico administrador correctamente',
             response,
         });
     } catch (error) {
@@ -224,130 +225,91 @@ export const getUser = async (req, res) => {
     }
 };
 
-//prueba de multi archivo
-export const arch = async (req, res) => {
-    console.log(req.body);
-    const img = [];
-    req.files.img.map((file, index) => {
-        img.push({
-            name: `proyect${index}`,
-            data: file.buffer,
-            contentType: file.mimetype,
-        });
-    });
-
-    const user = new User({ img });
-    // console.log(user);
-    await user.save();
-};
-
-// Ver imagenes
-export const viewImg = async (req, res) => {
-    const _id = req.query.id;
-    const name = req.query.name;
-
-    try {
-        // const resp = await User.findOne({ _id }, { img: 1 });
-        // const { data, contentType } = resp.img.find(
-        //     (file) => file.name === name
-        // );
-        // res.set('Content-Type', contentType);
-        // res.send(data);
-    } catch (error) {
-        return res.status(400).json({
-            mensaje: 'Ocurrio un error',
-            error,
-        });
-    }
-};
-
 // Modificar datos de usuarios
 export const updateUser = async (req, res) => {
     const _id = req.params.id;
-    const {
-        email,
-        password,
-        rol,
-        nombre,
-        avatar,
-        aboutme,
-        service,
-        recentproyects,
-        contacinfo,
-    } = req.body;
+    const { password } = req.body;
 
-    let body = {};
+    const user = new User({
+        ...req.body,
+        avatar: [],
+        imgProyects: [],
+    });
 
-    if (req.file) {
-        const data = req.file.buffer;
-        // const data = req.body.img; // Postman
-        const contentType = req.file.mimetype;
-        // const contentType = req.body.img.type; //Postman
-        const img = { data, contentType };
+    const files = { ...req.files };
 
-        const user = new Username({
-            nombre,
-            mail,
-            password,
-            direccion,
-            pais,
-            ciudad,
-            telefono,
-            actividad,
-            msg_description,
-            visible,
-            img,
-        });
-
-        if (user.nombre !== '') body['nombre'] = user.nombre;
-        if (user.mail !== '') body['mail'] = user.mail;
-        if (user.password !== '') {
-            // Encryptando contraseña
-            user.password = await user.encryptPassword(password);
-            body['password'] = user.password;
-        }
-        if (user.ciudad !== '') body['ciudad'] = user.ciudad;
-        if (user.pais !== '') body['pais'] = user.pais;
-        if (user.direccion !== '') body['direccion'] = user.direccion;
-        if (user.telefono !== '') body['telefono'] = user.telefono;
-        if (user.actividad !== '') body['actividad'] = user.actividad;
-        if (user.msg_description !== '')
-            body['msg_description'] = user.msg_description;
-        body['img'] = user.img;
+    if (files.hasOwnProperty('avatar')) {
+        const data = files.avatar[0].buffer;
+        const contentType = files.avatar[0].mimetype;
+        const avatar = { data, contentType };
+        user.avatar = avatar;
     } else {
-        const user = nuser({
-            nombre,
-            mail,
-            password,
-            direccion,
-            pais,
-            ciudad,
-            telefono,
-            actividad,
-            msg_description,
-            visible,
-        });
-
-        if (user.nombre !== '') body['nombre'] = user.nombre;
-        if (user.mail !== '') body['mail'] = user.mail;
-        if (user.password !== '') {
-            // Encryptando contraseña
-            user.password = await user.encryptPassword(password);
-            body['password'] = user.password;
-        }
-        if (user.ciudad !== '') body['ciudad'] = user.ciudad;
-        if (user.pais !== '') body['pais'] = user.pais;
-        if (user.direccion !== '') body['direccion'] = user.direccion;
-        if (user.telefono !== '') body['telefono'] = user.telefono;
-        if (user.actividad !== '') body['actividad'] = user.actividad;
-        if (user.msg_description !== '')
-            body['msg_description'] = user.msg_description;
-
-        body['visible'] = user.visible;
+        user.avatar = undefined;
     }
 
+    if (files.hasOwnProperty('imgProyects')) {
+        const imgProyects = files.images.map((file, index) => {
+            const data = file.buffer;
+            const contentType = file.mimetype;
+            const name = `proyect${index}`;
+            return { data, contentType, name };
+        });
+        user.imgProyects = imgProyects;
+    } else {
+        user.imgProyects = undefined;
+    }
+
+    // Se encripta contraseña si la contraseña existe
+    if (password && password !== '') {
+        user.password = await user.encryptPassword(password);
+    } else {
+        user.password = undefined;
+    }
+
+    // Se verifica campo email
+    if (!user.email && user.email === '') {
+        user.email = undefined;
+    }
+
+    // Se verifica campo nombreCompleto
+    if (!user.nombreCompleto && user.nombreCompleto === '') {
+        user.nombreCompleto = undefined;
+    }
+
+    // Se verifica campo aboutme
+    if (!user.aboutme && user.aboutme === '') {
+        user.aboutme = undefined;
+    }
+
+    // Se verifica campo service
+    if (!user.service && user.service === '') {
+        user.service = undefined;
+    }
+
+    // Se verifica campo recentproyects
+    if (!user.recentproyects && user.recentproyects === '') {
+        user.recentproyects = undefined;
+    }
+
+    // Se verifica campo contacinfo
+    if (!user.contacinfo && user.contacinfo === '') {
+        user.contacinfo = undefined;
+    }
+
+    const data = {
+        email: user.email,
+        password: user.password,
+        nombreCompleto: user.nombreCompleto,
+        avatar: user.avatar,
+        aboutme: user.aboutme,
+        service: user.service,
+        recentproyects: user.recentproyects,
+        contacinfo: user.contacinfo,
+        imgProyects: user.imgProyects,
+    };
+
     try {
-        const registro = await User.findByIdAndUpdate(_id, body, {
+        const registro = await User.findByIdAndUpdate(_id, data, {
             new: true,
         });
         res.status(200).json({
@@ -381,4 +343,8 @@ export const deleteUser = async (req, res) => {
             response,
         });
     } catch (error) {}
+};
+
+export const pruebaMultimagenesUser = async (req, res) => {
+    console.log({ ...req.files, ...req.body });
 };

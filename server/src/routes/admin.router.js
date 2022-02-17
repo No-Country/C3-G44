@@ -9,16 +9,12 @@ import {
     getUser,
     updateUser,
     deleteUser,
-    arch,
-    viewImg
+    pruebaMultimagenesUser,
 } from '../controller/admin.controller';
-import { verifyToken } from '../libs/VerifyToken'
+import { verifyToken } from '../libs/VerifyToken';
 import { upload } from '../libs/ImageMulter';
 
 const router = Router();
-
-// Ver imagenes
-router.get('/img', viewImg)
 
 // login de Administrador
 router.post('/login', getAdminUserPass);
@@ -38,18 +34,21 @@ router.put('/update/:id', verifyToken, updateAdmin);
 // Elimina un Administrador
 router.delete('/delete/:id', verifyToken, deleteAdmin);
 
-// Consulta todos los Emprendedores
+// Consulta todos los Usuarios
 router.get('/finduser', verifyToken, getUser);
 
-// Actualiza emprendedor
+// Actualiza Usuario
 router.put(
     '/updateuser/:id',
-    upload.single('img'),
+    upload.fields([
+        { name: 'avatar', maxCount: 1 },
+        { name: 'images', maxCount: 10 },
+    ]),
     verifyToken,
     updateUser
 );
 
-// Elimina emprendedor
+// Elimina Usuario
 router.delete('/deleteuser/:id', verifyToken, deleteUser);
 
 export default router;
