@@ -1,0 +1,17 @@
+
+h1{
+    margin-bottom: 30px !important; 
+}
+label {
+    font-size: 30px !important;
+}
+input {
+    display: flex !important;
+    margin-bottom: 30px !important;
+    color: #000000 !important;
+}
+
+button {
+    display: flex !important;
+    color: #000000 !important;
+}

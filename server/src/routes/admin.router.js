@@ -9,7 +9,7 @@ import {
     getUser,
     updateUser,
     deleteUser,
-    pruebaMultimagenesUser,
+    updateDataUser,
 } from '../controller/admin.controller';
 import { verifyToken } from '../libs/VerifyToken';
 import { upload } from '../libs/ImageMulter';
@@ -47,6 +47,9 @@ router.put(
     verifyToken,
     updateUser
 );
+
+// Actualizar Solo Datos de Usuarios
+router.put('/updatedatauser/:id', verifyToken, updateDataUser);
 
 // Elimina Usuario
 router.delete('/deleteuser/:id', verifyToken, deleteUser);

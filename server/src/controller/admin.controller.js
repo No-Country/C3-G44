@@ -225,13 +225,11 @@ export const getUser = async (req, res) => {
     }
 };
 
-// Modificar datos de usuarios
+// Modificar imagenes de usuarios
 export const updateUser = async (req, res) => {
     const _id = req.params.id;
-    const { password } = req.body;
 
     const user = new User({
-        ...req.body,
         avatar: [],
         imgProyects: [],
     });
@@ -247,7 +245,7 @@ export const updateUser = async (req, res) => {
         user.avatar = undefined;
     }
 
-    if (files.hasOwnProperty('imgProyects')) {
+    if (files.hasOwnProperty('images')) {
         const imgProyects = files.images.map((file, index) => {
             const data = file.buffer;
             const contentType = file.mimetype;
@@ -258,6 +256,39 @@ export const updateUser = async (req, res) => {
     } else {
         user.imgProyects = undefined;
     }
+
+    const data = {
+        avatar: user.avatar,
+        imgProyects: user.imgProyects,
+    };
+
+    try {
+        const registro = await User.findByIdAndUpdate(_id, data, {
+            new: true,
+        });
+        res.status(200).json({
+            auth: true,
+            id: registro._id,
+            mensaje: 'Actualizacion Imagenes Exitosa',
+        });
+    } catch (err) {
+        console.log(err);
+        return res
+            .status(400)
+            .json({ auth: true, mensaje: 'Ocurrio un error', err });
+    }
+};
+
+// Actualizar solo datos usuario
+export const updateDataUser = async (req, res) => {
+    console.log(req.body);
+    const _id = req.params.id;
+
+    const { password } = req.body;
+
+    const user = new User({
+        ...req.body,
+    });
 
     // Se encripta contraseña si la contraseña existe
     if (password && password !== '') {
@@ -292,7 +323,7 @@ export const updateUser = async (req, res) => {
     }
 
     // Se verifica campo contacinfo
-    if (!user.contacinfo && user.contacinfo === '') {
+    if (!user.contactinfo && user.contactinfo === '') {
         user.contacinfo = undefined;
     }
 
@@ -300,12 +331,10 @@ export const updateUser = async (req, res) => {
         email: user.email,
         password: user.password,
         nombreCompleto: user.nombreCompleto,
-        avatar: user.avatar,
         aboutme: user.aboutme,
         service: user.service,
         recentproyects: user.recentproyects,
-        contacinfo: user.contacinfo,
-        imgProyects: user.imgProyects,
+        contactinfo: user.contactinfo,
     };
 
     try {
@@ -315,7 +344,7 @@ export const updateUser = async (req, res) => {
         res.status(200).json({
             auth: true,
             id: registro._id,
-            mensaje: 'Actualizacion Exitosa',
+            mensaje: 'Actualizacion Datos Exitosa',
         });
     } catch (err) {
         console.log(err);

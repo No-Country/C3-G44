@@ -94,11 +94,16 @@ export const getUserMailPass = async (req, res) => {
     const token = jwt.sign({ id: user._id }, config.secret, {
         expiresIn: 60 * 60 * 2,
     });
+    user.password = undefined;
+    user.avatar = undefined;
+    user.imgProyects = undefined;
+
     res.status(200).json({
         auth: true,
         mensaje: 'Bienvenido ' + user.nombreCompleto,
         token,
-        rol: user.rol
+        rol: user.rol,
+        user
     });
 };
 
@@ -323,11 +328,11 @@ export const createImg = async (req, res) => {
 export const viewImg = async (req, res) => {
     const _id = req.query.id;
     const name = req.query.name;
-
     try {
-        const resp = await User.findOne({ _id }, { img: 1 });
-        // console.log(resp.img[0].contentType)
-        const img = resp.img.find((file) => file.name === name);
+        const resp = await User.findOne({ _id }, { imgProyects: 1 });
+        
+        const img = resp.imgProyects.find((file) => file.name === name);
+        
         res.set('Content-Type', img.contentType);
         res.send(img.data);
     } catch (error) {
