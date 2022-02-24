@@ -5,6 +5,7 @@ import './Login.css'
 import Axios from 'axios'
 import { UserContext } from '../context/UserContext';
 import { UserTypes } from '../types/UserTypes';
+/* import {eyeClose} from '../../public/img/eyeClose.png' */
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -33,35 +34,40 @@ export const Login = () => {
     };
 
     return (
-        <div className="container">
-            <form id="about" action="" onSubmit={handleLogin}>
-                <h1 className="section-title" >
-                    Login Screen
-                </h1>
-                <label htmlFor="email" >
-                    Email
-                </label>
-                <input
-                    type="email"
-                    name="email"
-                    className="cta"
-                    
-                />
-                <label htmlFor="password" >
-                    Password
-                </label>
-                <input
-                    type="password"
-                    name="password"
-                    className="cta"
-                />
-                <button
-                    className="cta btnlogin"
-                    type="submit"
-                >
-                    Login
-                </button>
-            </form>
-        </div>
+       /*  <div className='row'> */
+            <div id="container-form" className="align-self-center col-sm-10 col-md-6 m-auto  py-3 my-auto">
+                <form id="about" action="" onSubmit={handleLogin}>
+                <div className='row m-auto'>
+                <h1 className="section-title col-sm-10 col-md-10 mx-auto" >
+                        Ingresa tus datos de acceso
+                    </h1>
+                    <label htmlFor="email" className='px-3 col-sm-10 col-md-10 mx-auto' >
+                        Usuario
+                    </label>
+                    <input
+                        type="email"
+                        name="email"
+                        className="cta px-3 col-md-10 mx-auto col-sm-10"
+                        
+                    />
+                    <label htmlFor="password" className='px-3 col-sm-10 col-md-10  mx-auto ' >
+                        Contraseña
+                    </label>
+                    <input
+                        type="password"
+                        name="password"
+                        /* img src={"eyeClose.png"}  */
+                        className="cta px-3 col-sm-10 col-md-10 mx-auto"
+                    />
+                    <button
+                        className="cta btnlogin col-md-6 mx-auto"
+                        type="submit"
+                    >
+                        Iniciar sesión
+                    </button>
+                    </div>
+                </form>
+            </div>
+       /*  </div> */
     );
 };
