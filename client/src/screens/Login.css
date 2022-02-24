@@ -13,7 +13,7 @@
 
 
 
-h1 {
+#container-form h1 {
     margin-top: 30px !important;
     margin-bottom: 50px !important;
     font-family: 'Montserrat', sans-serif !important;
@@ -21,7 +21,7 @@ h1 {
     max-width: 90% !important;
 }
 
-label {
+#container-form label {
     font-size: 25px !important;
     margin-top: 30px !important;
     margin-bottom: -20px !important;
@@ -30,17 +30,17 @@ label {
 
 }
 
-input {
+#container-form input {
     display: flex !important;
     border-style: none !important;
     border-bottom: 5px solid #000000 !important;
     color: #000000 !important;
-    background-color: white;
+    background-color: transparent;
     max-height: 30px !important;
     max-width: 90% !important;
 }
 
-button {
+#container-form button {
     display: flex !important;
     justify-content: center !important;
     color: #000000 !important;

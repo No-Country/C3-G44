@@ -16,7 +16,7 @@ export const Header = () => {
     };
     return (
         <section id="header">
-            <div className="header container">
+            <div className="header">
                 <div className="nav-bar">
                     <div className="brand">
                         <a href="#hero">
