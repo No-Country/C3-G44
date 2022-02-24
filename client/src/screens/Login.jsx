@@ -22,7 +22,6 @@ export const Login = () => {
             .then((respuesta) => {
                 if (respuesta.data.auth) {
                     dispatchUser({ type: UserTypes.load, payload: respuesta.data })
-                    console.log(respuesta.data);
                     navigate('/porfolio');
                 } else {
                     alert(respuesta.data.mensaje);
