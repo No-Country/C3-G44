@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+
 import { About } from '../components/About';
 import { Banner } from '../components/Banner';
 import { Contact } from '../components/Contact';
@@ -6,34 +7,33 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Proyects } from '../components/Proyects';
 import { Services } from '../components/Services';
+import { useParams } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-import { loadDataUser } from '../helpers/loadDataUser';
 import { UserTypes } from '../types/UserTypes';
+import { loadPorfolioUser } from '../helpers/loadPorfolioUser';
 
-export const Porfolio = () => {
+export const PorfolioUser = () => {
     const [load, setLoad] = useState(false);
-    const { dispatchUser, stateUser } = useContext(UserContext);
+    const { dispatchUser } = useContext(UserContext);
     const [dataUser, setDataUser] = useState(null);
 
-    const { user, data } = stateUser;
-    const { token } = data;
+    const { id } = useParams();
 
     useEffect(() => {
-        const loadData = async (_id, token) => {
-            const dataResponse = await loadDataUser(_id, token);
+        const loadData = async (_id) => {
+            const dataResponse = await loadPorfolioUser(_id);
             const { data, user } = dataResponse;
-          setDataUser(user);
-          console.log('user en porfolio', dataResponse, token);
+            setDataUser(user);
             dispatchUser({
                 type: UserTypes.load,
                 payload: { data, user: user._id },
             });
         };
         if (!load) {
-            loadData(user, token);
+            loadData(id);
             setLoad(true);
         }
-    }, [dispatchUser, user, token, load]);
+    }, [dispatchUser, id, load]);
 
     return dataUser && load ? (
         <div>

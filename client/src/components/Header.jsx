@@ -1,80 +1,109 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { UserTypes } from '../types/UserTypes';
 
-export const Header = () => {
-    const navigate = useNavigate()
-    const { stateUser, dispatchUser} = useContext(UserContext);
+export const Header = ({user}) => {
+    const navigate = useNavigate();
+    const { dispatchUser, stateUser } = useContext(UserContext);
+
+    const { data } = stateUser;
+    const {auth} = stateUser;
+
+    const [toggle, setToggle] = useState(false);
+
     const handleLogout = () => {
         dispatchUser({ type: UserTypes.logout });
-        navigate('/')
+        navigate('/');
     };
     const handleLogin = () => {
         dispatchUser({ type: UserTypes.login });
         navigate('/porfolio');
     };
 
-    const hamburger = useRef(document.querySelector('.header .nav-bar .nav-list .hamburger')) 
-    const mobile_menu = useRef(document.querySelector('.header .nav-bar .nav-list ul'))
-    
-    useEffect(() => {
-         hamburger.current = document.querySelector('.header .nav-bar .nav-list .hamburger')
-         mobile_menu.current = document.querySelector('.header .nav-bar .nav-list ul')
-    }, [])
-    
+    const handleToggle = () => {
+        setToggle(!toggle);
+    };
 
-    const handleHamburger = () => {
-        hamburger.current.classList.toggle('active')
-        mobile_menu.current.classList.toggle('active')
-    }
-    
     return (
         <section id="header">
             <div className="header">
                 <div className="nav-bar">
                     <div className="brand">
-                        <a href="#hero">
-                            <img src="./img/logo.png" alt="" />
-                        </a>
+                        <Link to="/" onClick={handleLogout} >
+                            <img src="/img/logo_coder.png" alt="logo" />
+                        </Link>
                     </div>
                     <div className="nav-list">
-                        <div className="hamburger" onClick={handleHamburger}>
+                        <div
+                            className={
+                                toggle ? 'hamburger active' : 'hamburger'
+                            }
+                            onClick={handleToggle}
+                        >
                             <div className="bar"></div>
                         </div>
-                        <ul>
+                        <ul className={toggle ? 'active' : ''}>
                             <li>
-                                <a href="#hero" data-after="Home" onClick={handleHamburger}>
+                                <a
+                                    href="#hero"
+                                    data-after="Home"
+                                    onClick={handleToggle}
+                                >
                                     Home
                                 </a>
                             </li>
                             <li>
-                                <a href="#about" data-after="About" onClick={handleHamburger}>
+                                <a
+                                    href="#about"
+                                    data-after="About"
+                                    onClick={handleToggle}
+                                >
                                     About
                                 </a>
                             </li>
                             <li>
-                                <a href="#services" data-after="Service" onClick={handleHamburger}>
+                                <a
+                                    href="#services"
+                                    data-after="Service"
+                                    onClick={handleToggle}
+                                >
                                     Services
                                 </a>
                             </li>
                             <li>
-                                <a href="#projects" data-after="Projects" onClick={handleHamburger}>
+                                <a
+                                    href="#projects"
+                                    data-after="Projects"
+                                    onClick={handleToggle}
+                                >
                                     Projects
                                 </a>
                             </li>
                             <li>
-                                <a href="#contact" data-after="Contact" onClick={handleHamburger}>
+                                <a
+                                    href="#contact"
+                                    data-after="Contact"
+                                    onClick={handleToggle}
+                                >
                                     Contact
                                 </a>
                             </li>
                             <li>
-                                {stateUser.auth ? (
-                                    <Link onClick={handleLogout} to="/" data-after="Logout">
+                                {auth ? (
+                                    <Link
+                                        onClick={handleLogout}
+                                        to="/"
+                                        data-after="Logout"
+                                    >
                                         Logout
                                     </Link>
                                 ) : (
-                                    <Link to="/login" onClick={handleLogin} data-after="Login">
+                                    <Link
+                                        to="/login"
+                                        onClick={handleLogin}
+                                        data-after="Login"
+                                    >
                                         Login
                                     </Link>
                                 )}

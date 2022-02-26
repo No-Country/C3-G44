@@ -3,9 +3,9 @@ import { UserContext } from "../context/UserContext";
 import { Url } from "../lib/Url";
 
 
-export const About = () => {
-    const { stateUser } = useContext(UserContext)
-    const { user } = stateUser
+export const About = ({user}) => {
+    // const { stateUser } = useContext(UserContext)
+    // const { user } = stateUser
     const {_id, aboutme} = user 
     return (
     

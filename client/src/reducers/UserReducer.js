@@ -9,7 +9,7 @@ export const UserReducer = (state, action) => {
         case UserTypes.update:
             return [action.payload];
         case UserTypes.logout:
-            return {user: null, auth: false};
+            return {user: null, data: {auth: false}};
         default:
             console.log('reducer');
             return state;

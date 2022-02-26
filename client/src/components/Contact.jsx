@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { ItemContact } from "../components/ItemContact";
 import { UserContext } from "../context/UserContext";
 
-export const Contact = () => {
-    const { stateUser } = useContext(UserContext)
-    const { user } = stateUser
+export const Contact = ({user}) => {
+    // const { stateUser } = useContext(UserContext)
+    // const { user } = stateUser
     const { contactinfo } = user
     const { telefono, email, direccion } = contactinfo
     const icons = {
