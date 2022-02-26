@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
-export const Banner = () => {
-    const { stateUser } = useContext(UserContext)
-    const {user} = stateUser
+export const Banner = ({user}) => {
+    // const { stateUser } = useContext(UserContext)
+    // const {user} = stateUser
     return (
         <section id="hero">
             <div className="hero container">

@@ -5,7 +5,7 @@ export const Footer = () => {
         <section id="footer">
             <div className="footer container">
                 <div className="brand">
-                    <img src="./img/logo.png" alt="" />
+                    <img src="/img/logo_coder.png" alt="" />
                 </div>
                 <h2>Your Complete Web Solution</h2>
                 <div className="social-icon">

@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { Service } from "../components/Service";
 import { UserContext } from "../context/UserContext";
 
-export const Services = () => {
-    const { stateUser } = useContext(UserContext)
-    const { user } = stateUser
+export const Services = ({user}) => {
+    // const { stateUser } = useContext(UserContext)
+    // const { user } = stateUser
     const { service } = user
     const services2 = Object.values(service).filter((element) => typeof element === 'object');
     return (

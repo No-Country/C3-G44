@@ -3,9 +3,9 @@ import { Proyect } from "../components/Proyect";
 import { UserContext } from "../context/UserContext";
 import { Url } from "../lib/Url";
 
-export const Proyects = () => {
-    const { stateUser } = useContext(UserContext)
-    const { user } = stateUser
+export const Proyects = ({user}) => {
+    // const { stateUser } = useContext(UserContext)
+    // const { user } = stateUser
     const { recentproyects, _id } = user
     const proyects = Object.values(recentproyects)
     return (
