@@ -8,19 +8,10 @@ export const createUser = async (req, res) => {
     try {
         const { email, password, nombreCompleto } = req.body;
 
-        let avatar;
-
-        if (req.file) {
-            const data = req.file.buffer;
-            const contentType = req.file.mimetype;
-            avatar = { data, contentType };
-        }
-
         const user = new User({
             email,
             password,
             nombreCompleto,
-            avatar,
             rol: 'user',
         });
 

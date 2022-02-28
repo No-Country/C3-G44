@@ -32,7 +32,7 @@ router.post(
 router.get('/viewimg', viewImg);
 
 // Crear Usuarios
-router.post('/create', upload.single('avatar'), createUser);
+router.post('/create', createUser);
 
 // Login de Usuarios
 router.post('/login', getUserMailPass);
