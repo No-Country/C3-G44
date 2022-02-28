@@ -1,11 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-import "./Register.css";
-import { useState } from "react";
+import { registerUser } from '../../helpers/registerUser';
+
+import './Register.css';
 
 export const Register = () => {
     const [eyed, setEyed] = useState(true);
@@ -13,9 +14,10 @@ export const Register = () => {
     const handleEye = () => {
         setEyed(!eyed);
     };
-
-    const handleSubmit = (e) => {
-        console.log(e);
+    
+    const handleSubmit = async (e) => {
+        const response = await registerUser(e);
+        console.log(response);
     };
 
     return (
@@ -25,60 +27,58 @@ export const Register = () => {
         >
             <Formik
                 initialValues={{
-                    fullname: "",
-                    email: "",
-                    password: "",
+                    nombreCompleto: '',
+                    email: '',
+                    password: '',
                 }}
                 validationSchema={Yup.object().shape({
-                    fullname: Yup.string()
-                        .min(2, "Su nombre es muy corto")
-                        .required("Por favor ingrese su nombre y apellidos"),
+                    nombreCompleto: Yup.string()
+                        .min(2, 'Su nombre es muy corto')
+                        .required('Por favor ingrese su nombre y apellidos'),
                     email: Yup.string()
-                        .email("Debe ser un email valido")
-                        .required("Por favor ingrese su email"),
+                        .email('Debe ser un email valido')
+                        .required('Por favor ingrese su email'),
                     password: Yup.string()
-                        .min(8, "Contraseña muy corta")
-                        .max(20, "Contraseña muy larga")
-                        .required("Por favor ingrese una contraseña"),
+                        .min(8, 'Contraseña muy corta')
+                        .max(20, 'Contraseña muy larga')
+                        .required('Por favor ingrese una contraseña'),
                 })}
-                onSubmit={(values, {setValues}) => 
-                {
+                onSubmit={(values, { setValues }) => {
                     handleSubmit(values);
                     setValues({
-                        fullname: "",
-                        email: "",
-                        password: "",
+                        nombreCompleto: '',
+                        email: '',
+                        password: '',
                     });
-                }
-                }
+                }}
             >
-                {({
-                    errors,
-                    touched,
-                    handleSubmit,
-                    valid,
-                    setValues
-                }) => {
+                {({ errors, touched, handleSubmit, valid, setValues }) => {
                     return (
-                        <Form id="about" action="" onSubmit={(values) => handleSubmit(values, setValues)}>
+                        <Form
+                            id="form-register"
+                            action=""
+                            onSubmit={(values) =>
+                                handleSubmit(values, setValues)
+                            }
+                        >
                             <div className="row m-auto">
                                 <h1 className="section-title col-sm-10 col-md-10 mx-auto">
                                     Crea una cuenta
                                 </h1>
                                 <label
-                                    htmlFor="fullname"
+                                    htmlFor="nombreCompleto"
                                     className="px-3 col-sm-10 col-md-10 mx-auto"
                                 >
                                     Nombre y Apellidos
                                 </label>
                                 <Field
                                     type="text"
-                                    name="fullname"
+                                    name="nombreCompleto"
                                     className="cta px-3 col-md-10 mx-auto col-sm-10"
                                 />
-                                {errors.fullname && touched.fullname && (
+                                {errors.nombreCompleto && touched.nombreCompleto && (
                                     <p className="px-3 col-sm-10 col-md-10 mx-auto">
-                                        {errors.fullname}
+                                        {errors.nombreCompleto}
                                     </p>
                                 )}
                                 <label
@@ -112,14 +112,14 @@ export const Register = () => {
                                     aria-hidden="true"
                                     src={
                                         eyed
-                                            ? "/img/eyeClose.png"
-                                            : "/img/eyeOpen.png"
+                                            ? '/img/eyeClose.png'
+                                            : '/img/eyeOpen.png'
                                     }
                                     alt="eye"
                                     onClick={handleEye}
                                 />
                                 <Field
-                                    type={eyed ? "password" : "text"}
+                                    type={eyed ? 'password' : 'text'}
                                     name="password"
                                     /* img src={"eyeClose.png"}  */
                                     className="cta  px-3 col-sm-10 col-md-10 mx-auto"
@@ -138,9 +138,16 @@ export const Register = () => {
                                     Registrarse
                                 </button>
                                 <label className="px-3 col-sm-10 col-md-10 mt-3 m-auto text-center">
-                                    Ya tienes cuenta?{" "}
+                                    Ya tienes cuenta?{' '}
                                     <Link to="/login">Login</Link>
                                 </label>
+                                <div className="col-sm-10 col-md-10 mt-3  m-auto text-center">
+                                    <img
+                                        className="logo mb-3"
+                                        src="/img/logo_coder.png"
+                                        alt="logo"
+                                    />
+                                </div>
                             </div>
                         </Form>
                     );

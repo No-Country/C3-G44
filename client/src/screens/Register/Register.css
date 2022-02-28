@@ -1,12 +1,13 @@
 #container-register {
-    margin-top: 30px !important ;
-    border: 5px solid #000000 ;
-    border-radius: 25px ;
-    height: auto ;
-    max-width: 90% ;
     background-image: url(../../assets/img/im1.png ) ;
     background-size: cover ;
     background-position: top center ;
+    border: 5px solid #000000 ;
+    border-radius: 25px ;
+    box-shadow: 0px 10px 10px 1px rgba(112, 111, 111, 0.2);
+    height: auto ;
+    margin-top: 30px !important ;
+    max-width: 90% ;
     position: relative ;
     z-index: 1 ;
 }
@@ -53,12 +54,15 @@
 
 #container-register img{
     display: inline-block;
-    /* margin-left: 300px; */
+    filter: brightness(0);
     max-height: 15%;
     max-width: 15%;
     margin-bottom: -30px;
-    /* vertical-align:text-bottom; */
-    filter: brightness(0);
+}
+
+#container-register img:hover{
+    cursor: pointer;
+    transform: scale(1.1)
 }
 
 #container-register button {
@@ -74,6 +78,18 @@
 #container-register button:disabled, button[disabled] {
 
 background-color: grey;
+}
+
+#container-register .logo{
+    display: inline-block;
+    filter: brightness(1);
+    max-height: 20%;
+    max-width: 20%;
+}
+
+#container-register .logo:hover{
+        cursor: default;
+    transform: scale(1)
 }
 
 @media only screen and (min-width: 768px) {

@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import React from "react";
 import { Url } from "../lib/Url";
 
 
-export const About = ({user}) => {
-    // const { stateUser } = useContext(UserContext)
-    // const { user } = stateUser
+export const About = ({ user }) => {
+    
     const {_id, aboutme} = user 
     return (
     
