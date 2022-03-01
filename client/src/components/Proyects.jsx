@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Proyect } from "../components/Proyect";
-import { UserContext } from "../context/UserContext";
 import { Url } from "../lib/Url";
 
-export const Proyects = () => {
-    const { stateUser } = useContext(UserContext)
-    const { user } = stateUser
+export const Proyects = ({user}) => {
+
     const { recentproyects, _id } = user
-    const proyects = Object.values(recentproyects)
+    const proyects = recentproyects && Object.values(recentproyects)
     return (
         <section id="projects">
             <div className="projects container">
@@ -17,7 +15,7 @@ export const Proyects = () => {
                     </h1>
                 </div>
                 <div className="all-projects">
-                    {proyects.map(({ title, subtitle = 'Coding is Love', description}, index) => (
+                    {proyects && proyects.map(({ title, subtitle = 'Coding is Love', description}, index) => (
                         <Proyect
                             tittle={title}
                             subtittle={subtitle}

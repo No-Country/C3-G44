@@ -6,26 +6,13 @@ import path from 'path';
 //Crear Usuario
 export const createUser = async (req, res) => {
     try {
-        const {
-            email,
-            password,
-            nombreCompleto,
-        } = req.body;
-
-        let avatar;
-
-        if (req.file) {
-            const data = req.file.buffer;
-            const contentType = req.file.mimetype;
-            avatar = { data, contentType };
-        }
+        const { email, password, nombreCompleto } = req.body;
 
         const user = new User({
             email,
             password,
             nombreCompleto,
-            avatar,
-            rol: 'user'
+            rol: 'user',
         });
 
         const correo = await User.findOne({ email });
@@ -64,15 +51,13 @@ export const createUser = async (req, res) => {
 // Consulta base de datos por email y password Login
 export const getUserMailPass = async (req, res) => {
     // Consulto usuario por email si lo encuentra devuelve datos de usuario
-    const user = await User.findOne(
-        {
-            email: req.body.email,
-        },
-    ).select('+password');
+    const user = await User.findOne({
+        email: req.body.email,
+    }).select('+password');
 
     // Verifico si no se encontro el email en base de datos
     if (!user) {
-        return res.json({ auth: false, mensaje: 'Email no esta registrado' });
+        return res.json({data: {auth: false, mensaje: 'Email no esta registrado'} });
     }
 
     // Si el usuario existe comparo contraseña
@@ -84,13 +69,13 @@ export const getUserMailPass = async (req, res) => {
     // Si la validacion de contraseña es incorrecta
     if (!validPassword) {
         return res.json({
-            auth: false,
+            data: {auth: false,
             token: null,
-            mensaje: 'Contraseña incorrecta',
+            mensaje: 'Contraseña incorrecta',}
         });
     }
 
-    // Si la contraseña es correcta creo token por 2 horas 
+    // Si la contraseña es correcta creo token por 2 horas
     const token = jwt.sign({ id: user._id }, config.secret, {
         expiresIn: 60 * 60 * 2,
     });
@@ -99,11 +84,13 @@ export const getUserMailPass = async (req, res) => {
     user.imgProyects = undefined;
 
     res.status(200).json({
-        auth: true,
-        mensaje: 'Bienvenido ' + user.nombreCompleto,
-        token,
-        rol: user.rol,
-        user
+        data: {
+            auth: true,
+            mensaje: 'Bienvenido ' + user.nombreCompleto,
+            token,
+            rol: user.rol,
+        },
+        user: user._id,
     });
 };
 
@@ -112,14 +99,35 @@ export const getUserId = async (req, res) => {
     const _id = req.params.id;
 
     try {
-        const register = await User.findOne({ _id }, { avatar: 0 }).select(
+        const user = await User.findOne({ _id }, { avatar: 0, imgProyects: 0 }).select(
             '-password'
         );
-        res.json({ auth: true, register });
+        user.password = undefined;
+        user.avatar = undefined;
+        user.imgProyects = undefined;
+        res.json({ data: {auth: false, token: null}, user });
     } catch (error) {
         return res
             .status(400)
-            .json({ auth: true, mensaje: 'Ocurrio un error', error });
+            .json({ data: {auth: false, mensaje: 'Ocurrio un error', error} });
+    }
+};
+
+// Consultar base de datos por id de usuario devuelve token y auth
+export const getDataAuthUserId = async (req, res) => {
+    const _id = req.params.id;
+    const token = req.headers.authorization.split(' ')[1];
+    console.log(token);
+
+    try {
+        const user = await User.findOne({ _id }, { avatar: 0, imgProyects: 0 }).select(
+            '-password'
+        );
+        res.json({ data: { auth: true, token }, user });
+    } catch (error) {
+        return res
+            .status(400)
+            .json({ data: {auth: false, mensaje: 'Ocurrio un error', error} });
     }
 };
 
@@ -159,15 +167,8 @@ export const viewImgUser = async (req, res) => {
 // Actualizar un usuario
 export const updateUser = async (req, res) => {
     const _id = req.params.id;
-    const {
-        nombre,
-        email,
-        password,
-        direccion,
-        telefono,
-        pais,
-        ciudad,
-    } = req.body;
+    const { nombre, email, password, direccion, telefono, pais, ciudad } =
+        req.body;
 
     let body = {};
 
@@ -197,8 +198,7 @@ export const updateUser = async (req, res) => {
             body['password'] = user.password;
         }
         if (user.ciudad !== '') body['ciudad'] = user.ciudad;
-        if (user.pais !== '')
-            body['pais'] = user.pais;
+        if (user.pais !== '') body['pais'] = user.pais;
         if (user.direccion !== '') body['direccion'] = user.direccion;
         if (user.telefono !== '') body['telefono'] = user.telefono;
         body['avatar'] = user.avatar;
@@ -221,8 +221,7 @@ export const updateUser = async (req, res) => {
             body['password'] = user.password;
         }
         if (user.ciudad !== '') body['ciudad'] = user.ciudad;
-        if (user.pais !== '')
-            body['pais'] = user.pais;
+        if (user.pais !== '') body['pais'] = user.pais;
         if (user.direccion !== '') body['direccion'] = user.direccion;
         if (user.telefono !== '') body['telefono'] = user.telefono;
     }
@@ -288,7 +287,7 @@ export const terminos = async (req, res) => {
     });
 };
 
-// Prueba de imagenes en array 
+// Prueba de imagenes en array
 export const createImg = async (req, res) => {
     console.log(req.body);
 
@@ -330,9 +329,9 @@ export const viewImg = async (req, res) => {
     const name = req.query.name;
     try {
         const resp = await User.findOne({ _id }, { imgProyects: 1 });
-        
+
         const img = resp.imgProyects.find((file) => file.name === name);
-        
+
         res.set('Content-Type', img.contentType);
         res.send(img.data);
     } catch (error) {

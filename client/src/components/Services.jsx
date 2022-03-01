@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Service } from "../components/Service";
-import { UserContext } from "../context/UserContext";
 
-export const Services = () => {
-    const { stateUser } = useContext(UserContext)
-    const { user } = stateUser
+export const Services = ({user}) => {
     const { service } = user
-    const services2 = Object.values(service).filter((element) => typeof element === 'object');
+    const services2 = service && Object.values(service).filter((element) => typeof element === 'object');
     return (
         <section id="services">
             <div className="services container">
@@ -14,12 +11,12 @@ export const Services = () => {
                     <h1 className="section-title">
                         Serv<span>i</span>ces
                     </h1>
-                    <p>
+                    {services2 && <p>
                         {service.general}
-                    </p>
+                    </p>}
                 </div>
                 <div className="service-bottom">
-                    {services2.map(({tittle, description}, index) => (
+                    {services2 && services2.map(({tittle, description}, index) => (
                         <Service key={index} tittle={tittle} text={description} />
                     ))}
                 </div>

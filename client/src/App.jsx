@@ -5,14 +5,22 @@ import { LoginRouter } from './routers/LoginRouter';
 
 const initUser = () => {
     return localStorage.getItem('auth') !== null
-        ? { auth: JSON.parse(localStorage.getItem('auth')), user: JSON.parse(localStorage.getItem('user'))}
-        : { auth: false };
+        ? {
+              data: {
+                  auth: JSON.parse(localStorage.getItem('auth')),
+                  token: JSON.parse(localStorage.getItem('token')),
+              },
+              user: JSON.parse(localStorage.getItem('user')),
+          }
+        : { data: { auth: false, token: null }, user: null };
 };
 
 function App() {
     const [stateUser, dispatchUser] = useReducer(UserReducer, {}, initUser);
     useEffect(() => {
-        localStorage.setItem('auth', JSON.stringify(stateUser.auth));
+        console.log(stateUser);
+        localStorage.setItem('auth', JSON.stringify(stateUser.data.auth));
+        localStorage.setItem('token', JSON.stringify(stateUser.data.token));
         localStorage.setItem('user', JSON.stringify(stateUser.user));
     }, [stateUser]);
 
