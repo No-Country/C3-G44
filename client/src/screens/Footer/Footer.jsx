@@ -3,6 +3,6 @@ import './Footer.css'
 
 export const  Footer = () => {
   return (
-    <div className="container" ><h1 className="section-title" >Footer Screen</h1></div>
+    <div id='footer-data' className="container" ><h1 className="section-title" >Footer Screen</h1></div>
   )
 }

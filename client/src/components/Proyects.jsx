@@ -5,7 +5,7 @@ import { Url } from "../lib/Url";
 export const Proyects = ({user}) => {
 
     const { recentproyects, _id } = user
-    const proyects = Object.values(recentproyects)
+    const proyects = recentproyects && Object.values(recentproyects)
     return (
         <section id="projects">
             <div className="projects container">
@@ -15,7 +15,7 @@ export const Proyects = ({user}) => {
                     </h1>
                 </div>
                 <div className="all-projects">
-                    {proyects.map(({ title, subtitle = 'Coding is Love', description}, index) => (
+                    {proyects && proyects.map(({ title, subtitle = 'Coding is Love', description}, index) => (
                         <Proyect
                             tittle={title}
                             subtittle={subtitle}
