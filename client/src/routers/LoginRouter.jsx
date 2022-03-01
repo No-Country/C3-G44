@@ -31,7 +31,7 @@ export const LoginRouter = () => {
 
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/home/*" element={<Home />} />
                 <Route path="/origin" element={<Origin />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/service" element={<Service />} />
