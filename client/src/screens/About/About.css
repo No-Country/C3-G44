@@ -1,3 +1,93 @@
-#about{
+#about {
     background-color: #ffffff;
+}
+
+#about .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+
+
+#about .custom + label {
+  border: 1px;
+  color: #000000;
+  /* background-color: #000000; */
+  padding: 0;
+  position: relative;
+  height: 5px;
+  width: 500px;
+  display: block;
+}
+
+#about .custom:focus + label,
+#about .custom + label:hover {
+  border-color: #000000;
+}
+
+#about .custom + label span {
+     width: 75%;
+    height: 10px;
+    line-height: 10px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+    padding-left: 10px;
+}
+
+#about .custom .container-input-file .label_line{
+    background-color: #000000;
+    padding: 0;
+  position: relative;
+  height: 5px;
+  width: 500px;
+  display: block;
+}
+
+#about .custom + label strong {
+  height: 5px;
+  line-height: 5px;
+  color: #000000;
+  background-color: #ffffff;
+  display: inline-block;
+  vertical-align: middle;
+  width: 25%;
+  padding-left: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#about .custom + label:hover strong {
+  /* background-color: #aa80ff; */
+  cursor: pointer;
+}
+
+#about .custom + label:hover span {
+  cursor: pointer;
+}
+
+#about .container {
+  max-width: 500px;
+  width: 500px;
+  height: 15px;
+  border: solid 0.5px #ffffff;
+  background-color: #000000;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.89;
+  letter-spacing: normal;
+  text-align: left;
+  padding: 5px 5px 65px 5px;
 }
