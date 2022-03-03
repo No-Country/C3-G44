@@ -1,5 +1,6 @@
 #about-home {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    /* background-image: url(../../assets/img/im1.png); */
     /* background-position: top center ;
     background-size: cover ;
     border: #000000 solid;
@@ -12,7 +13,20 @@
     /* z-index: 1 ; */
 }
 
+#about-home .label-title-image{
+    display: flex;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: -30px;
+}
+
+#about-home .label-name-image{
+    border-bottom: 5px #000000 solid;
+    padding-top: 28px;
+}
+
 #about-home .inputfile {
+    cursor: pointer;
     width: 53px;
     height: 54px;
     opacity: 0;
@@ -34,53 +48,14 @@
     margin-left: 5px;
 }
 
-#about-home .custom:focus + label,
-#about-home .custom + label:hover {
-    border-color: #000000;
-}
-
-#about-home .custom + label span {
-    width: 75%;
-    height: 50px;
-    line-height: 10px;
-    display: inline-block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    padding-left: 10px;
-    margin-top: 30px;
-}
-
-#about-home .custom + label strong {
-    height: 5px;
-    line-height: 5px;
-    color: #000000;
-    background-color: #ffffff;
-    display: inline-block;
-    vertical-align: middle;
-    width: 25%;
-    padding-left: 10px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#about-home .custom + label:hover strong {
-    /* background-color: #aa80ff; */
-    cursor: pointer;
-}
-
-#about-home .custom + label:hover span {
-    cursor: pointer;
-}
-
-#about-home .container-image{
+#about-home .container-image {
     display: flex;
     max-width: 53px;
     max-height: 54px;
-    padding: 0px
+    padding: 0px;
 }
 
-#about-home .container-image img:hover{
+#about-home .container-image:hover {
     cursor: pointer;
 }
 
@@ -130,51 +105,79 @@
     color: #000000;
     background-color: transparent;
     /* margin-bottom: 10px; */
-    max-height: 87px ;
-    /* max-width: auto ; */
+    max-height: 87px;
+    width: 70% ;
     min-height: 10vh;
     min-width: 50vh;
     padding: 3px;
 }
 
+#about-home .label-cv-name{
+    display: flex;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: -30px;
+}
+
+#about-home .label-cv {
+    width: 37%;
+    border-bottom: 5px #000000 solid;
+    padding-top: 28px;
+}
+/* Inicio boton Upload */
 #about-home .btn-upload {
     height: 40px;
-    width:  280px;
+    width: 30%;
     margin-top: 15px;
-    margin-left: 18px;
-    background-color: transparent;
+    margin-left: 10px;
+    background-color: #f1623f;
+    /* background-color: transparent; */
+    opacity: 0.75;
     border: 2px solid #f1623f;
     border-radius: 30px;
+    font-size: 15px;
 }
 
 #about-home .btn-upload:hover {
     color: #ffffff;
     background-color: #f1623f;
+    opacity: 1;
+    /* filter: brightness(85%); */
 }
 
-@media only screen and (min-width: 1024px){
+#about-home .btn-upload .container-button-img{
+    width: 32px; 
+    height: 32px;
+    display: inline-block;
+    margin-right: 2px;
+}
+
+/* Fin boton Upload */
+
+@media only screen and (min-width: 1024px) {
     #about-home .label-cv {
+        width: 38%;
+    }
+    #about-home .btn-upload {
         width: 37%;
-}
-#about-home .btn-upload{
-    width: 38%
-}
+    }
 }
 
-@media only screen and (max-width: 767px){
-    #about-home .btn-upload{
-    margin-left: 1px;
-    margin-top: 15px
-}
-#about-home .titulo textarea{
-    margin-bottom: 15px;
-}
+@media only screen and (max-width: 767px) {
+    #about-home .btn-upload {
+        margin-left: 1px;
+        margin-top: 15px;
+        width: 65%;
+    }
+    #about-home .titulo textarea {
+        margin-bottom: 15px;
+    }
 
-#about-home .titulo input{
-    width: 49%
-}
+    #about-home .titulo input {
+        width: 49%;
+    }
 
-#about-home .label-cv{
-    width: 49%;
-}
+    #about-home .label-cv {
+        width: 49%;
+    }
 }

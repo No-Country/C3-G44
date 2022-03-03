@@ -26,7 +26,7 @@ export const Home = () => {
 
     const handleTabPanel = (number) => {
         setTabPanel(number);
-        console.log(number);
+        setToggle(true);
     };
 
     return (
