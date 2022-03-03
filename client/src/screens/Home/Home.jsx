@@ -164,7 +164,7 @@ export const Home = () => {
                     <div className="cardBox"></div>
                 </div>
             </div>
-            <div className="tab-panel">
+            <div className="tab-panel container">
                 {tabPanel === 0 ? (
                     <Origin />
                 ) : tabPanel === 1 ? (

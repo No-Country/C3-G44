@@ -35,7 +35,7 @@ router.put('/update/:id', verifyToken, updateAdmin);
 router.delete('/delete/:id', verifyToken, deleteAdmin);
 
 // Consulta todos los Usuarios
-router.get('/finduser', verifyToken, getUser);
+router.get('/finduser',  getUser);
 
 // Actualiza Usuario
 router.put(

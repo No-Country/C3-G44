@@ -217,3 +217,10 @@
     background-color: var(--white);
     display: flex;
 }
+
+/* #body .tab-panel{
+    padding-left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
