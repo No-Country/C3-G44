@@ -13,12 +13,13 @@
 }
 
 #about-home .inputfile {
-    width: 0.1px;
-    height: 0.1px;
+    width: 53px;
+    height: 54px;
     opacity: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: absolute;
-    z-index: -1;
+    /* z-index: -1; */
+    /* background-image: url(../../assets/img/save.png); */
 }
 
 #about-home .custom + label {
@@ -73,9 +74,14 @@
 }
 
 #about-home .container-image{
+    display: flex;
     max-width: 53px;
     max-height: 54px;
     padding: 0px
+}
+
+#about-home .container-image img:hover{
+    cursor: pointer;
 }
 
 #about-home .container {
@@ -129,4 +135,46 @@
     min-height: 10vh;
     min-width: 50vh;
     padding: 3px;
+}
+
+#about-home .btn-upload {
+    height: 40px;
+    width:  280px;
+    margin-top: 15px;
+    margin-left: 18px;
+    background-color: transparent;
+    border: 2px solid #f1623f;
+    border-radius: 30px;
+}
+
+#about-home .btn-upload:hover {
+    color: #ffffff;
+    background-color: #f1623f;
+}
+
+@media only screen and (min-width: 1024px){
+    #about-home .label-cv {
+        width: 37%;
+}
+#about-home .btn-upload{
+    width: 38%
+}
+}
+
+@media only screen and (max-width: 767px){
+    #about-home .btn-upload{
+    margin-left: 1px;
+    margin-top: 15px
+}
+#about-home .titulo textarea{
+    margin-bottom: 15px;
+}
+
+#about-home .titulo input{
+    width: 49%
+}
+
+#about-home .label-cv{
+    width: 49%;
+}
 }
