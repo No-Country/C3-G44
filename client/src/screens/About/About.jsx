@@ -161,7 +161,7 @@ export const About = () => {
                             className="btn-upload col-sm-4 text-center"
                         >
                             <div className="container-button-img">
-                                <img src="/img/save.png" alt="save" />
+                                <img src="/img/subir.png" alt="save" />
                             </div>
                             Subir
                         </button>
