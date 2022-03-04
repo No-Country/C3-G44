@@ -42,6 +42,7 @@ router.put(
     '/updateuser/:id',
     upload.fields([
         { name: 'avatar', maxCount: 1 },
+        { name: 'cv', maxCount: 1 },
         { name: 'images', maxCount: 10 },
     ]),
     verifyToken,

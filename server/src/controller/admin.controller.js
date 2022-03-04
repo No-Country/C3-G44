@@ -232,6 +232,7 @@ export const updateUser = async (req, res) => {
     const user = new User({
         avatar: [],
         imgProyects: [],
+        cv: [],
     });
 
     const files = { ...req.files };
@@ -257,9 +258,19 @@ export const updateUser = async (req, res) => {
         user.imgProyects = undefined;
     }
 
+    if (files.hasOwnProperty('cv')) {
+        const data = files.cv[0].buffer;
+        const contentType = files.cv[0].mimetype;
+        const cv = { data, contentType };
+        user.cv = cv;
+    } else {
+        user.cv = undefined;
+    }
+
     const data = {
         avatar: user.avatar,
         imgProyects: user.imgProyects,
+        cv: user.cv,
     };
 
     try {
@@ -290,6 +301,7 @@ export const updateDataUser = async (req, res) => {
         ...req.body,
     });
 
+    console.log(user);
     // Se encripta contraseña si la contraseña existe
     if (password && password !== '') {
         user.password = await user.encryptPassword(password);

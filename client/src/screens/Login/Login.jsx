@@ -32,7 +32,7 @@ export const Login = () => {
                         payload: respuesta.data,
                     });
                     console.log(respuesta.data);
-                    navigate(`/porfolio`);
+                    navigate(`/home`);
                 } else {
                     alert(respuesta.data.data.mensaje);
                 }

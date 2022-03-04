@@ -3,22 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { UserTypes } from '../types/UserTypes';
 
-export const Header = ({user}) => {
+export const Header = ({ user }) => {
     const navigate = useNavigate();
     const { dispatchUser, stateUser } = useContext(UserContext);
 
     const { data } = stateUser;
-    const {auth} = stateUser;
+    const { auth } = data;
 
     const [toggle, setToggle] = useState(false);
 
     const handleLogout = () => {
         dispatchUser({ type: UserTypes.logout });
         navigate('/');
-    };
-    const handleLogin = () => {
-        dispatchUser({ type: UserTypes.login });
-        navigate('/porfolio');
     };
 
     const handleToggle = () => {
@@ -30,7 +26,7 @@ export const Header = ({user}) => {
             <div className="header">
                 <div className="nav-bar">
                     <div className="brand">
-                        <Link to="/" onClick={handleLogout} >
+                        <Link to="/" onClick={handleLogout}>
                             <img src="/img/logo_coder.png" alt="logo" />
                         </Link>
                     </div>
@@ -90,21 +86,20 @@ export const Header = ({user}) => {
                                 </a>
                             </li>
                             <li>
-                                {auth ? (
+                                {auth && (
+                                    <Link to="/home" data-after="Back">
+                                        Update
+                                    </Link>
+                                )}
+                            </li>
+                            <li>
+                                {auth && (
                                     <Link
                                         onClick={handleLogout}
                                         to="/"
                                         data-after="Logout"
                                     >
                                         Logout
-                                    </Link>
-                                ) : (
-                                    <Link
-                                        to="/login"
-                                        onClick={handleLogin}
-                                        data-after="Login"
-                                    >
-                                        Login
                                     </Link>
                                 )}
                             </li>

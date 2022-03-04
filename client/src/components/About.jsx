@@ -21,7 +21,7 @@ export const About = ({ user }) => {
                             <p>{aboutme.description}</p>
                         </>
                     )}
-                    <a href="#" className="cta">
+                    <a href={`${Url}/user/cv/${_id}`} target="_blank" rel="noreferrer" className="cta">
                         Download Resume
                     </a>
                 </div>

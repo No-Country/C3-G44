@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
+import { UserTypes } from '../../types/UserTypes';
 import { About } from '../About/About';
 import { Contact } from '../Contact/Contact';
-import { Footer } from '../Footer/Footer';
 import { Origin } from '../Origin/Origin';
 import { Projects } from '../Projects/Projects';
 import { Service } from '../Service/Service';
 import './Home.css';
 
 export const Home = () => {
+
+    const navigate = useNavigate();
+    const { dispatchUser } = useContext(UserContext);
+
     const [links, setLinks] = useState([]);
     const [toggle, setToggle] = useState(false);
     const [tabPanel, setTabPanel] = useState(null);
@@ -27,6 +33,11 @@ export const Home = () => {
     const handleTabPanel = (number) => {
         setTabPanel(number);
         setToggle(true);
+    };
+
+    const handleLogout = () => {
+        dispatchUser({ type: UserTypes.logout });
+        navigate('/');
     };
 
     return (
@@ -124,21 +135,21 @@ export const Home = () => {
                             className={links[5] ? 'hovered' : ''}
                             onMouseOver={() => handleMouseOver(5)}
                         >
-                            <a href="#footer" onClick={() => handleTabPanel(5)}>
+                            <Link to='/porfolio' >
                                 <span className="icon">
                                     <img
                                         src="https://img.icons8.com/bubbles/50/000000/file.png"
                                         alt="file"
                                     />
                                 </span>
-                                <span className="title">Footer</span>
-                            </a>
+                                <span className="title">Porfolio</span>
+                            </Link>
                         </li>
                         <li
                             className={links[6] ? 'hovered' : ''}
                             onMouseOver={() => handleMouseOver(6)}
                         >
-                            <a href="#">
+                            <Link to='/' onClick={handleLogout} >
                                 <span className="icon">
                                     <img
                                         src="https://img.icons8.com/bubbles/50/000000/cancel.png"
@@ -146,7 +157,7 @@ export const Home = () => {
                                     />
                                 </span>
                                 <span className="title">Salir</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -176,8 +187,8 @@ export const Home = () => {
                 ) : tabPanel === 4 ? (
                     <Contact />
                 ) : tabPanel === 5 ? (
-                    <Footer />
-                ) : (
+                     navigate(`/porfolio`)
+                ) : tabPanel === 6 ? handleLogout() :(
                     <div className="container" />
                 )}
             </div>
