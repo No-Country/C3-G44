@@ -38,7 +38,7 @@ export const Login = () => {
     };
 
     return (
-        /*  <div className='row'> */
+       
         <div
             id="container-form"
             className="align-self-center col-sm-10 col-md-6 m-auto  py-3 my-auto"
@@ -68,7 +68,6 @@ export const Login = () => {
                     <input
                         type="password"
                         name="password"
-                        /* img src={"eyeClose.png"}  */
                         className="cta px-3 col-sm-10 col-md-10 mx-auto"
                     />
                     <button
