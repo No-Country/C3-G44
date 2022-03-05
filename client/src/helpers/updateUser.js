@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import Swal from 'sweetalert2'
 
 export const updateUser = async (user, token, avatar = null, images = null, data = null, cv = null) => {
 
@@ -14,7 +15,22 @@ export const updateUser = async (user, token, avatar = null, images = null, data
         },
     })
         .then((response) => {
-            resp['data_mensaje']= response.data.mensaje;
+            resp['data_mensaje'] = response.data.mensaje;
+            let timerInterval;
+            Swal.fire({
+                title: response.data.mensaje,
+                icon: 'success',
+                timer: 2000,
+                timerProgressBar: true,
+                willClose: () => {
+                    clearInterval(timerInterval);
+                },
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log("I was closed by the timer");
+                }
+            });
         })
         .catch((err) => {
             console.log(err);
