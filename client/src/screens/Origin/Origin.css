@@ -1,3 +1,51 @@
 #origin{
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
 }
+
+#origin .titulo label {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: -30px;
+    max-width: 90%;
+}
+
+#origin .titulo input {
+    border-style: none;
+    border-bottom: 5px solid #000000;
+    background-color: transparent;
+    color: #000000;
+    display: flex;
+    font-size: 12px;
+    max-height: 30px;
+    width: 100%;
+}
+
+/* Inicio boton Upload */
+#origin .btn-upload {
+    height: 40px;
+    width: 45%;
+    margin-top: 45px;
+    margin-left: 10px;
+    background-color: #f1623f;
+    /* background-color: transparent; */
+    opacity: 0.75;
+    border: 2px solid #f1623f;
+    border-radius: 30px;
+    font-size: 15px;
+}
+
+#origin .btn-upload:hover {
+    color: #ffffff;
+    background-color: #f1623f;
+    opacity: 1;
+    /* filter: brightness(85%); */
+}
+
+#origin .btn-upload .container-button-img{
+    width: 32px; 
+    height: 32px;
+    display: inline-block;
+    margin-right: 2px;
+}
+
+/* Fin boton Upload */

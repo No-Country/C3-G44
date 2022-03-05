@@ -1,37 +1,31 @@
-import React, { useContext, useState } from 'react';
-import './About.css';
+import React, { useContext, useEffect, useState } from "react";
+import "./About.css";
 
-import Axios from 'axios';
-import { UserContext } from '../../context/UserContext';
-import { loadDataUser } from '../../helpers/loadDataUser';
+import { UserContext } from "../../context/UserContext";
+import { loadDataUser } from "../../helpers/loadDataUser";
+import { updateUser } from "../../helpers/updateUser";
 
 export const About = () => {
-
-
-    const { stateUser, dispatchUser } = useContext(UserContext);
+    const [aboutme, setAboutme] = useState({ profesion: "", description: "" });
+    const { stateUser } = useContext(UserContext);
     const { user } = stateUser;
     const { data } = stateUser;
     const { token } = data;
-    
-    const loadData = async (_id, token) => {
-        const dataResponse = await loadDataUser(_id, token);
-        const { data, user } = dataResponse;
-        
-        console.table(user);
-        
-    };
 
-    loadData(user, token)
-
-    const [name, setName] = useState('');
-    const [nameCV, setNameCV] = useState('');
+    const [name, setName] = useState("");
+    const [nameCV, setNameCV] = useState("");
 
     const handleInputFile = (e) => {
-        setName(e.target.value.split('\\').pop());
+        setName(e.target.value.split("\\").pop());
     };
 
     const handleInputFileCV = (e) => {
-        setNameCV(e.target.value.split('\\').pop());
+        setNameCV(e.target.value.split("\\").pop());
+    };
+
+    const handleOnchange = (e) => {
+        console.log(e.target.value);
+        setAboutme({ ...aboutme, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
@@ -47,45 +41,17 @@ export const About = () => {
         };
         const cv = e.target[3].files[0];
 
-        console.log(
-            e.target[0].value,
-            e.target[1].value,
-            e.target[2].value
-            // e.target[3].value
-        );
-
-        carga(avatar, null, data, cv);
+        updateUser(user, token, avatar, null, data, cv);
     };
 
-    const carga = async (avatar = null, images = null, data = null, cv = null) => {
-        const img = new FormData();
-        img.append('avatar', avatar);
-        images && images.map((file) => img.append('images', file));
-        img.append('cv', cv);
-        await Axios.put(`/admin/updatedatauser/${user}`, data, {
-            headers: {
-                Authorization: `Baered ${token}`,
-            },
-        })
-            .then((response) => {
-                console.log(response.data.mensaje);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-        await Axios.put(`/admin/updateuser/${user}`, img, {
-            headers: {
-                Authorization: `Baered ${token}`,
-            },
-        })
-            .then((respuesta) => {
-                console.log(respuesta.data.mensaje);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+    useEffect(() => {
+        const loadData = async (_id, tokens) => {
+            const dataResponse = await loadDataUser(_id, tokens);
+            const { user } = dataResponse;
+            setAboutme({ ...user.aboutme });
+        };
+        loadData(user, token);
+    }, [user, token]);
 
     return (
         <div
@@ -122,16 +88,30 @@ export const About = () => {
                     </div>
 
                     <div className="titulo col- 12 col-sm-5  align-content-center justify-content-center pt-5">
-                        <label htmlFor="titulo" style={{ paddingLeft: '7px' }}>
+                        <label
+                            htmlFor="profesion"
+                            style={{ paddingLeft: "7px" }}
+                        >
                             Profesion
                         </label>
-                        <input type="text" name="titulo" />
+                        <input
+                            type="text"
+                            name="profesion"
+                            value={aboutme?.profesion}
+                            onChange={handleOnchange}
+                        />
                     </div>
                     <div className="titulo col- 12 col-sm-7">
-                        <label htmlFor="textarea">
+                        <label htmlFor="description">
                             Descripcion de Profesion
                         </label>
-                        <textarea type="text" name="textarea" rows="5" />
+                        <textarea
+                            type="text"
+                            name="description"
+                            rows="5"
+                            value={aboutme?.description}
+                            onChange={handleOnchange}
+                        />
                     </div>
 
                     <div className="row px-4">

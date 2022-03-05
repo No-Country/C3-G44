@@ -1,16 +1,5 @@
 #about-home {
     /* background-color: #ffffff; */
-    /* background-image: url(../../assets/img/im1.png); */
-    /* background-position: top center ;
-    background-size: cover ;
-    border: #000000 solid;
-    display: flex;
-    height: auto ;
-    margin: auto;
-    margin-top: auto ;
-    max-width: 100% ; */
-    /* position: relative ; */
-    /* z-index: 1 ; */
 }
 
 #about-home .label-title-image{
@@ -59,26 +48,6 @@
     cursor: pointer;
 }
 
-#about-home .container {
-    max-width: 500px;
-    width: 500px;
-    height: 15px;
-    border: solid 0.5px #ffffff;
-    background-color: #000000;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.89;
-    letter-spacing: normal;
-    text-align: left;
-    padding: 5px 5px 65px 5px;
-}
-
 #about-home .titulo label {
     font-size: 15px;
     margin-top: 10px;
@@ -105,6 +74,7 @@
     color: #000000;
     background-color: transparent;
     /* margin-bottom: 10px; */
+    font-size: 13px;
     max-height: 87px;
     width: 70% ;
     min-height: 10vh;
