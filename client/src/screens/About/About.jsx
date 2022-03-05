@@ -24,7 +24,6 @@ export const About = () => {
     };
 
     const handleOnchange = (e) => {
-        console.log(e.target.value);
         setAboutme({ ...aboutme, [e.target.name]: e.target.value });
     };
 

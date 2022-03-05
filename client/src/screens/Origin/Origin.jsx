@@ -34,7 +34,6 @@ export const Origin = () => {
         const loadData = async (_id, tokens) => {
             const dataResponse = await loadDataUser(_id, tokens);
             const { email, nombreCompleto } = dataResponse.user;
-            console.log(email, nombreCompleto);
             setDataUser({ email, nombreCompleto });
         };
         loadData(user, token);

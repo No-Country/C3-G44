@@ -292,7 +292,6 @@ export const updateUser = async (req, res) => {
 
 // Actualizar solo datos usuario
 export const updateDataUser = async (req, res) => {
-    console.log(req.body);
     const _id = req.params.id;
 
     const { password } = req.body;
