@@ -301,6 +301,7 @@ export const updateDataUser = async (req, res) => {
     });
 
     console.log(user);
+    console.log(req.body);
     // Se encripta contraseña si la contraseña existe
     if (password && password !== '') {
         user.password = await user.encryptPassword(password);
@@ -335,7 +336,7 @@ export const updateDataUser = async (req, res) => {
 
     // Se verifica campo contacinfo
     if (!user.contactinfo && user.contactinfo === '') {
-        user.contacinfo = undefined;
+        user.contactinfo = undefined;
     }
 
     const data = {
