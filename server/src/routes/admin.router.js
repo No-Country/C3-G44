@@ -35,13 +35,14 @@ router.put('/update/:id', verifyToken, updateAdmin);
 router.delete('/delete/:id', verifyToken, deleteAdmin);
 
 // Consulta todos los Usuarios
-router.get('/finduser', verifyToken, getUser);
+router.get('/finduser',  getUser);
 
 // Actualiza Usuario
 router.put(
     '/updateuser/:id',
     upload.fields([
         { name: 'avatar', maxCount: 1 },
+        { name: 'cv', maxCount: 1 },
         { name: 'images', maxCount: 10 },
     ]),
     verifyToken,

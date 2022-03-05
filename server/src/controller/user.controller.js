@@ -120,7 +120,7 @@ export const getDataAuthUserId = async (req, res) => {
     console.log(token);
 
     try {
-        const user = await User.findOne({ _id }, { avatar: 0, imgProyects: 0 }).select(
+        const user = await User.findOne({ _id }, { avatar: 0, imgProyects: 0, cv: 0 }).select(
             '-password'
         );
         res.json({ data: { auth: true, token }, user });
@@ -164,6 +164,22 @@ export const viewImgUser = async (req, res) => {
     }
 };
 
+// Ver archivo pdf cv de usuario
+export const viewCVUser = async (req, res) => {
+    const _id = req.params.id;
+
+    try {
+        const resp = await User.findOne({ _id }, { cv: 1 });
+        res.set('Content-Type', resp.cv.contentType);
+        res.send(resp.cv.data);
+    } catch (error) {
+        return res.status(400).json({
+            mensaje: 'Ocurrio un error',
+            error,
+        });
+    }
+};
+
 // Actualizar un usuario
 export const updateUser = async (req, res) => {
     const _id = req.params.id;
@@ -174,9 +190,7 @@ export const updateUser = async (req, res) => {
 
     if (req.file) {
         const data = req.file.buffer;
-        // const data = req.body.img; // Postman
         const contentType = req.file.mimetype;
-        // const contentType = req.body.img.type; //Postman
         const avatar = { data, contentType };
 
         const user = new User({

@@ -9,6 +9,7 @@
     min-height: 100vh;
     overflow-x: hidden;
     background-image: url('../../assets/img/fondo.png');
+    /* backdrop-filter: brightness(80%); */
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
@@ -217,3 +218,10 @@
     background-color: var(--white);
     display: flex;
 }
+
+/* #body .tab-panel{
+    padding-left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */

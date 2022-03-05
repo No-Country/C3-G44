@@ -7,5 +7,5 @@ export const PublicRouter = ({children}) => {
     const { data } = stateUser;
     const { auth } = data;
 
-    return !auth ? children : <Navigate to='/porfolio' />
+    return !auth ? children : <Navigate to='/home' />
 };

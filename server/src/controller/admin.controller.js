@@ -232,6 +232,7 @@ export const updateUser = async (req, res) => {
     const user = new User({
         avatar: [],
         imgProyects: [],
+        cv: [],
     });
 
     const files = { ...req.files };
@@ -257,9 +258,19 @@ export const updateUser = async (req, res) => {
         user.imgProyects = undefined;
     }
 
+    if (files.hasOwnProperty('cv')) {
+        const data = files.cv[0].buffer;
+        const contentType = files.cv[0].mimetype;
+        const cv = { data, contentType };
+        user.cv = cv;
+    } else {
+        user.cv = undefined;
+    }
+
     const data = {
         avatar: user.avatar,
         imgProyects: user.imgProyects,
+        cv: user.cv,
     };
 
     try {
@@ -281,7 +292,6 @@ export const updateUser = async (req, res) => {
 
 // Actualizar solo datos usuario
 export const updateDataUser = async (req, res) => {
-    console.log(req.body);
     const _id = req.params.id;
 
     const { password } = req.body;
@@ -290,6 +300,8 @@ export const updateDataUser = async (req, res) => {
         ...req.body,
     });
 
+    console.log(user);
+    console.log(req.body);
     // Se encripta contraseña si la contraseña existe
     if (password && password !== '') {
         user.password = await user.encryptPassword(password);
@@ -324,7 +336,7 @@ export const updateDataUser = async (req, res) => {
 
     // Se verifica campo contacinfo
     if (!user.contactinfo && user.contactinfo === '') {
-        user.contacinfo = undefined;
+        user.contactinfo = undefined;
     }
 
     const data = {

@@ -6,6 +6,7 @@ const usernameSchema = new Schema({
     password: { type: String, required: true, max: 40, select: false },
     nombreCompleto: { type: String, required: true, max: 40 },
     avatar: { data: Buffer, contentType: String },
+    cv: { data: Buffer, contentType: String },
     rol: { type: String, required: true, max: 15 },
     aboutme: { type: Object, required: false, max: 40 },
     service: { type: Object, required: false, max: 40 },

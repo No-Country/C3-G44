@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -9,6 +9,7 @@ import { registerUser } from '../../helpers/registerUser';
 import './Register.css';
 
 export const Register = () => {
+    const navigate = useNavigate();
     const [eyed, setEyed] = useState(true);
 
     const handleEye = () => {
@@ -18,6 +19,7 @@ export const Register = () => {
     const handleSubmit = async (e) => {
         const response = await registerUser(e);
         console.log(response);
+        response.auth && navigate('/home')
     };
 
     return (

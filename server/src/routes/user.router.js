@@ -13,6 +13,7 @@ import {
     deleteUser,
     logoutUser,
     terminos,
+    viewCVUser,
 } from '../controller/user.controller';
 
 import { verifyToken } from '../libs/VerifyToken';
@@ -45,6 +46,9 @@ router.get('/:id', getUserId);
 
 // Ver imagen de Usuario
 router.get('/imagen/:id', viewImgUser);
+
+// ver archivo pdf CV de Usuario
+router.get('/cv/:id', viewCVUser);
 
 // Buscar todos los Usuarios
 router.get('/all', verifyToken, getUserAll);
