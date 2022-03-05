@@ -1,3 +1,78 @@
-#service{
+#service {
     background-color: #ffffff;
+}
+
+#service h2 {
+    font-size: 35px;
+    color: #FA5716;
+}
+
+#service .big-lavel {
+    font-size: 25px;
+}
+
+#service .small-lavel {
+    font-size: 15px;
+}
+
+#service .description-input {
+    border: solid #000000 2px;
+    min-height: 100px;
+    font-size: 16px;
+    padding-left: 1em;
+
+}
+
+
+#service .low-black-border {
+    border-style: none;
+    border-bottom: solid #000000 2px;
+}
+
+#service .button-transparent {
+    border-radius: 50px;
+    border-color: #FA5716;
+    color: #FA5716;
+    font-size: 15px;
+    background-color: transparent;
+}
+
+#service .button-orange {
+    border-style: none;
+    border-radius: 50px;
+    background-color: #FA5716;
+    color: #ffffff;
+    font-size: 15px;
+    min-width: 150px;
+}
+
+/* Media Querys para que el texto del input no se desborde */
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    white-space: pre-line;
+    position: relative;
+    top: -7px;
+
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    white-space: pre-line;
+    position: relative;
+    top: -7px;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    white-space: pre-line;
+    position: relative;
+    top: -7px;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    white-space: pre-line;
+    position: relative;
+    top: -7px;
 }
