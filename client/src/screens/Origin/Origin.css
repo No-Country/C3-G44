@@ -20,6 +20,14 @@
     width: 100%;
 }
 
+#origin .titulo a {
+    text-decoration: none;
+    color: #000000;
+    display: block;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
 /* Inicio boton Upload */
 #origin .btn-upload {
     height: 40px;

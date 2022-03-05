@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { loadDataUser } from "../../helpers/loadDataUser";
 import { updateUser } from "../../helpers/updateUser";
+import { UrlClient } from "../../lib/Url";
 import "./Origin.css";
 
 export const Origin = () => {
@@ -9,6 +10,8 @@ export const Origin = () => {
     const { user } = stateUser;
     const { data } = stateUser;
     const { token } = data;
+
+    const url = `${UrlClient}/porfolio/${user}`;
 
     const [dataUser, setDataUser] = useState({
         nombreCompleto: "",
@@ -49,7 +52,7 @@ export const Origin = () => {
                     <div className="titulo col-12 align-content-center justify-content-center pt-5">
                         <label
                             htmlFor="nombreCompleto"
-                            style={{ paddingLeft: "7px" }}
+                            style={{ paddingLeft: '7px' }}
                         >
                             Nombre
                         </label>
@@ -61,7 +64,7 @@ export const Origin = () => {
                         />
                     </div>
                     <div className="titulo col-12 align-content-center justify-content-center pt-5">
-                        <label htmlFor="email" style={{ paddingLeft: "7px" }}>
+                        <label htmlFor="email" style={{ paddingLeft: '7px' }}>
                             Usuario
                         </label>
                         <input
@@ -74,7 +77,7 @@ export const Origin = () => {
                     <div className="titulo col- 12 align-content-center justify-content-center pt-5">
                         <label
                             htmlFor="password"
-                            style={{ paddingLeft: "7px" }}
+                            style={{ paddingLeft: '7px' }}
                         >
                             Password
                         </label>
@@ -83,6 +86,14 @@ export const Origin = () => {
                             name="password"
                             onChange={handleOnChange}
                         />
+                    </div>
+                    <div className="titulo col- 12 align-content-center justify-content-center pt-5">
+                        <label htmlFor="url" style={{ paddingLeft: '7px' }}>
+                            Link de Porfolio
+                        </label>
+                        <a href={url} target="_blank" rel="noreferrer">
+                            {url}
+                        </a>
                     </div>
                     <button
                         type="submit"
