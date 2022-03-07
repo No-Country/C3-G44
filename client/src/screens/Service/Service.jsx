@@ -3,6 +3,8 @@ import { UserContext } from '../../context/UserContext';
 import { loadDataUser } from '../../helpers/loadDataUser';
 import { updateUser } from '../../helpers/updateUser';
 import { Puesto } from './Puesto';
+import logo from '../../assets/img/logo_coder.png';
+
 import './Service.css';
 
 export const Service = () => {
@@ -71,39 +73,47 @@ export const Service = () => {
     }, [user, token]);
 
     return (
-        <form
+        <div
             id="service"
             className="container row m-auto  p-5 d-flex align-items-center"
-            onSubmit={handleSubmit}
         >
-            <div className="col-md-10">
-                <h2 className="mb-5"> Experiencia laboral</h2>
-                <textarea
-                    type="text"
-                    name="general"
-                    placeholder="En este espacio podés hacer una descripción general de tu experiencia laboral"
-                    className="description-input col-md-12"
-                    value={services?.general}
-                    onChange={handleChange}
-                />
+            <div className="d-flex justify-content-end col-md-10">
+                <img src={logo} alt="Logo Coder" className="col-md-2" />
             </div>
-            {Object.values(services)
-                .filter((element) => typeof element === 'object')
-                .map((service, index) => (
-                    <Puesto key={index} service={service} number={index} />
-                ))}
-            <div className="col-md-10 d-flex justify-content-center mb-5">
-                <button
-                    className="button-transparent px-4 py-3"
-                    type="button"
-                    onClick={handleAddPuesto}
-                >
-                    Agregar otro puesto
-                </button>
-            </div>
-            <div className=" col-md-10 d-flex justify-content-center mb-5">
-                <button className="button-orange px-5 py-3">Subir</button>
-            </div>
-        </form>
+            <form
+                // id="service"
+                className="container row m-auto  p-5 d-flex align-items-center"
+                onSubmit={handleSubmit}
+            >
+                <div className="col-md-10">
+                    <h2 className="mb-5"> Experiencia laboral</h2>
+                    <textarea
+                        type="text"
+                        name="general"
+                        placeholder="En este espacio podés hacer una descripción general de tu experiencia laboral"
+                        className="description-input col-md-12"
+                        value={services?.general}
+                        onChange={handleChange}
+                    />
+                </div>
+                {Object.values(services)
+                    .filter((element) => typeof element === 'object')
+                    .map((service, index) => (
+                        <Puesto key={index} service={service} number={index} />
+                    ))}
+                <div className="col-md-10 d-flex justify-content-center mb-5">
+                    <button
+                        className="button-transparent px-4 py-3"
+                        type="button"
+                        onClick={handleAddPuesto}
+                    >
+                        Agregar otro puesto
+                    </button>
+                </div>
+                <div className=" col-md-10 d-flex justify-content-center mb-5">
+                    <button className="button-orange px-5 py-3">Subir</button>
+                </div>
+            </form>
+        </div>
     );
 };

@@ -4,6 +4,8 @@ import "./About.css";
 import { UserContext } from "../../context/UserContext";
 import { loadDataUser } from "../../helpers/loadDataUser";
 import { updateUser } from "../../helpers/updateUser";
+import logo from '../../assets/img/logo_coder.png';
+
 
 export const About = () => {
     const [aboutme, setAboutme] = useState({ profesion: "", description: "" });
@@ -55,98 +57,110 @@ export const About = () => {
     return (
         <div
             id="about-home"
-            className="container align-self-center col-sm-10 col-md-6 m-auto  py-3 my-auto"
+            className="container row d-flex align-items-center"
         >
-            <form action="" onSubmit={handleSubmit}>
-                <div className="row">
-                    <div className="row px-4">
-                        <label
-                            className="label-title-image"
-                            htmlFor="choose_file"
-                        >
-                            Imagen Personal
-                        </label>
-                        <label className="label-name-image col-6">
-                            <span id="file_name">{name}</span>
-                        </label>
-                        <div className="container-image col-4 w-25">
-                            <img
-                                htmlFor="choose_file"
-                                src="/img/save.png"
-                                alt="save"
-                            />
-                            <input
-                                type="file"
-                                accept="image/*"
-                                name="choose_file"
-                                id="choose_file"
-                                className="inputfile custom"
-                                onChange={handleInputFile}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="titulo col- 12 col-sm-5  align-content-center justify-content-center pt-5">
-                        <label
-                            htmlFor="profesion"
-                            style={{ paddingLeft: "7px" }}
-                        >
-                            Profesion
-                        </label>
-                        <input
-                            type="text"
-                            name="profesion"
-                            value={aboutme?.profesion}
-                            onChange={handleOnchange}
-                        />
-                    </div>
-                    <div className="titulo col- 12 col-sm-7">
-                        <label htmlFor="description">
-                            Descripcion de Profesion
-                        </label>
-                        <textarea
-                            type="text"
-                            name="description"
-                            rows="5"
-                            value={aboutme?.description}
-                            onChange={handleOnchange}
-                        />
-                    </div>
-
-                    <div className="row px-4">
-                        <label className="label-cv-name" htmlFor="choose_cv">
-                            Link CV/Resume
-                        </label>
-                        <label className="label-cv col-4">
-                            <span id="file_name_cv">{nameCV}</span>
-                        </label>
-                        <div className="container-image col-4 w-25">
-                            <img
-                                htmlFor="choose_cv"
-                                src="/img/save.png"
-                                alt="save"
-                            />
-                            <input
-                                type="file"
-                                accept=".pdf"
-                                name="choose_cv"
-                                id="choose_file"
-                                className="inputfile custom"
-                                onChange={handleInputFileCV}
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="btn-upload col-sm-4 text-center"
-                        >
-                            <div className="container-button-img">
-                                <img src="/img/subir.png" alt="save" />
-                            </div>
-                            Subir
-                        </button>
-                    </div>
+            <div className="row ms-5">
+                <div className="d-flex justify-content-end col-md-10">
+                    <img src={logo} alt="Logo Coder" className="col-md-2" />
                 </div>
-            </form>
+                <form
+                    action=""
+                    onSubmit={handleSubmit}
+                    className="d-flex justify-content-end col-md-10"
+                >
+                    <div className="row ">
+                        <div className="row px-4">
+                            <label
+                                className="label-title-image"
+                                htmlFor="choose_file"
+                            >
+                                Imagen Personal
+                            </label>
+                            <label className="label-name-image col-6">
+                                <span id="file_name">{name}</span>
+                            </label>
+                            <div className="container-image col-4 w-25">
+                                <img
+                                    htmlFor="choose_file"
+                                    src="/img/subir.png"
+                                    alt="save"
+                                />
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    name="choose_file"
+                                    id="choose_file"
+                                    className="inputfile custom"
+                                    onChange={handleInputFile}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="titulo col- 12 col-sm-5  align-content-center justify-content-center pt-5">
+                            <label
+                                htmlFor="profesion"
+                                style={{ paddingLeft: '7px' }}
+                            >
+                                Profesion
+                            </label>
+                            <input
+                                type="text"
+                                name="profesion"
+                                value={aboutme?.profesion}
+                                onChange={handleOnchange}
+                            />
+                        </div>
+                        <div className="titulo col- 12 col-sm-7">
+                            <label htmlFor="description">
+                                Descripcion de Profesion
+                            </label>
+                            <textarea
+                                type="text"
+                                name="description"
+                                rows="5"
+                                value={aboutme?.description}
+                                onChange={handleOnchange}
+                            />
+                        </div>
+
+                        <div className="row px-4">
+                            <label
+                                className="label-cv-name"
+                                htmlFor="choose_cv"
+                            >
+                                Link CV/Resume
+                            </label>
+                            <label className="label-cv col-4">
+                                <span id="file_name_cv">{nameCV}</span>
+                            </label>
+                            <div className="container-image col-4 w-25">
+                                <img
+                                    htmlFor="choose_cv"
+                                    src="/img/subir.png"
+                                    alt="save"
+                                />
+                                <input
+                                    type="file"
+                                    accept=".pdf"
+                                    name="choose_cv"
+                                    id="choose_file"
+                                    className="inputfile custom"
+                                    onChange={handleInputFileCV}
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="btn-upload col-sm-4 text-center"
+                            >
+                                <div className="container-button-img">
+                                    <img src="/img/save.png" alt="save" />
+                                </div>
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
