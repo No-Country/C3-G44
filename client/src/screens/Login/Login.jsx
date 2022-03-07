@@ -20,7 +20,6 @@ export const Login = () => {
 
     const handleSubmit = (values) => {
         carga(values);
-        console.log(values);
     };
 
     const carga = async (data) => {
@@ -31,7 +30,6 @@ export const Login = () => {
                         type: UserTypes.load,
                         payload: respuesta.data,
                     });
-                    console.log(respuesta.data);
                     navigate(`/home`);
                 } else {
                     alert(respuesta.data.data.mensaje);

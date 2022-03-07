@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Service = ({title, text}) => {
+export const Service = ({service}) => {
     return (
         <div className="service-item">
             <div className="icon">
@@ -9,8 +9,11 @@ export const Service = ({title, text}) => {
                     alt="icon"
                 />
             </div>
-            <h2>{title}</h2>
-            <p>{text}</p>
+            <h2>{service?.title}</h2>
+            <h2>{service?.subtitle}</h2>
+            <p>{service?.description}</p>
+            <p>Desde: {service?.dateinit}</p>
+            <p>Hasta: {service?.datefinish} </p>
         </div>
     );
 };

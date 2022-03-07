@@ -18,7 +18,6 @@ const initUser = () => {
 function App() {
     const [stateUser, dispatchUser] = useReducer(UserReducer, {}, initUser);
     useEffect(() => {
-        console.log(stateUser);
         localStorage.setItem('auth', JSON.stringify(stateUser.data.auth));
         localStorage.setItem('token', JSON.stringify(stateUser.data.token));
         localStorage.setItem('user', JSON.stringify(stateUser.user));

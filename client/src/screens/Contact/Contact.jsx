@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./Contact.css";
-import logo from "../../assets/img/logo_coder.png";
-import { Direccion } from "./Direccion";
-import { Telefono } from "./Telefono";
-import { Mail } from "./Mail";
-import { updateUser } from "../../helpers/updateUser";
-import { UserContext } from "../../context/UserContext";
-import { loadDataUser } from "../../helpers/loadDataUser";
+import React, { useContext, useEffect, useState } from 'react';
+import './Contact.css';
+import logo from '../../assets/img/logo_coder.png';
+import { Direccion } from './Direccion';
+import { Telefono } from './Telefono';
+import { Mail } from './Mail';
+import { updateUser } from '../../helpers/updateUser';
+import { UserContext } from '../../context/UserContext';
+import { loadDataUser } from '../../helpers/loadDataUser';
 
 export const Contact = () => {
     const { stateUser } = useContext(UserContext);
@@ -17,68 +17,64 @@ export const Contact = () => {
     const [direccion, setDireccion] = useState({});
     const [telefono, setTelefono] = useState({});
     const [email, setMail] = useState({});
-    const [reload, setReload] = useState(false);
 
     const handleAddDireccion = () => {
         const number = {};
-        number[`direccion${Object.keys(direccion).length + 1}`] = "";
+        number[`direccion${Object.keys(direccion).length + 1}`] = '';
         setDireccion({ ...direccion, ...number });
     };
 
     const handleAddTelefono = () => {
         const number = {};
-        number[`telefono${Object.keys(telefono).length + 1}`] = "";
+        number[`telefono${Object.keys(telefono).length + 1}`] = '';
         setTelefono({ ...telefono, ...number });
     };
 
     const handleAddMail = () => {
         const number = {};
-        number[`email${Object.keys(email).length + 1}`] = "";
+        number[`email${Object.keys(email).length + 1}`] = '';
         setMail({ ...email, ...number });
     };
 
     const handleOnSubmit = (e) => {
-      e.preventDefault();
+        e.preventDefault();
         const contactinfo = {
             contactinfo: { direccion: {}, telefono: {}, email: {} },
         };
 
         [...e.target].forEach((element) => {
-            if (element.name !== "" && element.value !== "") {
-                if (element.name.includes("direccion")) {
-                    if (element.value !== "") {
+            if (element.name !== '' && element.value !== '') {
+                if (element.name.includes('direccion')) {
+                    if (element.value !== '') {
                         contactinfo.contactinfo.direccion[element.name] =
                             element.value;
                     }
                 }
-                if (element.name.includes("telefono")) {
-                    if (element.value !== "") {
+                if (element.name.includes('telefono')) {
+                    if (element.value !== '') {
                         contactinfo.contactinfo.telefono[element.name] =
                             element.value;
                     }
                 }
-                if (element.name.includes("email")) {
+                if (element.name.includes('email')) {
                     contactinfo.contactinfo.email[element.name] = element.value;
                 }
             }
         });
 
-        console.log(contactinfo);
-
-      updateUser(user, token, null, null, contactinfo);
-      loadData(user, token);
+        updateUser(user, token, null, null, contactinfo);
+        loadData(user, token);
     };
 
-  const loadData = async (_id, tokens) => {
-      const dataResponse = await loadDataUser(_id, tokens);
-      const { user } = dataResponse;
-      setDireccion(user.contactinfo.direccion);
-      setTelefono(user.contactinfo.telefono);
-      setMail(user.contactinfo.email);
-  };
-  
+    const loadData = async (_id, tokens) => {
+        const dataResponse = await loadDataUser(_id, tokens);
+        const { user } = dataResponse;
+        setDireccion(user?.contactinfo?.direccion ?? { direccion1: '' });
+        setTelefono(user?.contactinfo?.telefono ?? { telefono1: '' });
+        setMail(user?.contactinfo?.email ?? { email1: '' });
+    };
+
     useEffect(() => {
-        
         loadData(user, token);
     }, [user, token]);
 

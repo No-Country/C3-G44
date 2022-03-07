@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
-export const Direccion = ({number, value}) => {
+export const Direccion = ({ number, value }) => {
+    
     const [direccion, setDireccion] = useState(value)
 
     const handleOnChange = (e) => {
         setDireccion(e.target.value);
+        
     }
 
   return (

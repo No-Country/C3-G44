@@ -16,8 +16,8 @@ export const Services = ({user}) => {
                     </p>}
                 </div>
                 <div className="service-bottom">
-                    {services2 && services2.map(({title, description}, index) => (
-                        <Service key={index} title={title} text={description} />
+                    {services2 && services2.map((service, index) => (
+                        <Service key={index} service={service}  />
                     ))}
                 </div>
             </div>

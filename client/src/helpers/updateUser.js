@@ -25,12 +25,7 @@ export const updateUser = async (user, token, avatar = null, images = null, data
                 willClose: () => {
                     clearInterval(timerInterval);
                 },
-            }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log("I was closed by the timer");
-                }
-            });
+            })
         })
         .catch((err) => {
             console.log(err);
