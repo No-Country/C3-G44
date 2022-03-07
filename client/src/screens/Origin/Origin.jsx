@@ -45,7 +45,7 @@ export const Origin = () => {
     return (
         <div
             id="origin"
-            className='className="container align-self-center col-sm-10 col-md-6 m-auto  py-3 my-auto"'
+            className='align-self-center col-sm-10 col-md-6 m-auto  py-3 my-auto'
         >
             <form action="" onSubmit={handleSubmit}>
                 <div className="row">
