@@ -9,8 +9,9 @@ import { Projects } from '../Projects/Projects';
 import { Service } from '../Service/Service';
 import './Home.css';
 
-export const Home = () => {
+import logo from '../../assets/img/fondo.png';
 
+export const Home = () => {
     const navigate = useNavigate();
     const { dispatchUser } = useContext(UserContext);
 
@@ -41,7 +42,10 @@ export const Home = () => {
     };
 
     return (
-        <div id="body">
+        <div
+            id="body"
+            style={tabPanel === null ? { backgroundImage: `url(${logo})` }: {}}
+        >
             <div className="container-home  ">
                 <div className={toggle ? 'navigation active' : 'navigation'}>
                     <ul>
@@ -135,7 +139,7 @@ export const Home = () => {
                             className={links[5] ? 'hovered' : ''}
                             onMouseOver={() => handleMouseOver(5)}
                         >
-                            <Link to='/porfolio' >
+                            <Link to="/porfolio">
                                 <span className="icon">
                                     <img
                                         src="https://img.icons8.com/bubbles/50/000000/file.png"
@@ -149,7 +153,7 @@ export const Home = () => {
                             className={links[6] ? 'hovered' : ''}
                             onMouseOver={() => handleMouseOver(6)}
                         >
-                            <Link to='/' onClick={handleLogout} >
+                            <Link to="/" onClick={handleLogout}>
                                 <span className="icon">
                                     <img
                                         src="https://img.icons8.com/bubbles/50/000000/cancel.png"
@@ -187,8 +191,10 @@ export const Home = () => {
                 ) : tabPanel === 4 ? (
                     <Contact />
                 ) : tabPanel === 5 ? (
-                     navigate(`/porfolio`)
-                ) : tabPanel === 6 ? handleLogout() :(
+                    navigate(`/porfolio`)
+                ) : tabPanel === 6 ? (
+                    handleLogout()
+                ) : (
                     <div className="container" />
                 )}
             </div>

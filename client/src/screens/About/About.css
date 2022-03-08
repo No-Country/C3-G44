@@ -1,5 +1,6 @@
 #about-home {
-    /* background-color: #ffffff; */
+    background-color: #ffffff;
+    padding-left: 150px;
 }
 
 #about-home .label-title-image{
@@ -10,7 +11,7 @@
 }
 
 #about-home .label-name-image{
-    border-bottom: 5px #000000 solid;
+    border-bottom: 3px #000000 solid;
     padding-top: 28px;
 }
 
@@ -57,7 +58,7 @@
 
 #about-home .titulo input {
     border-style: none;
-    border-bottom: 5px solid #000000;
+    border-bottom: 3px solid #000000;
     background-color: transparent;
     color: #000000;
     display: flex;
@@ -91,7 +92,7 @@
 
 #about-home .label-cv {
     width: 37%;
-    border-bottom: 5px #000000 solid;
+    border-bottom: 3px #000000 solid;
     padding-top: 28px;
 }
 /* Inicio boton Upload */
