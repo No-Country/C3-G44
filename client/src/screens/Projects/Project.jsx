@@ -9,48 +9,52 @@ export const Project = () => {
     const handleInputFile = () => {};
     const handleOnchange = () => {};
     return (
-        <>
-            <div className="row px-4">
-                <label className="label-title-image" htmlFor="choose_file">
-                    Imagen del Proyecto
-                </label>
-                <label className="label-name-image col-6">
-                    <span id="file_name">{'name'}</span>
-                </label>
-                <div
-                    className="container-image col-4 w-25"
-                    onMouseOver={handleMouseOverImg}
-                    onMouseOut={handleMouseOverImg}
-                >
-                    <img
-                        htmlFor="choose_file"
-                        src={
-                            imgHover ? '/img/subir_hover.png' : '/img/subir.png'
-                        }
-                        alt="save"
+        <div id='projects'>
+    {/* Primera fila: img del proyecto */}
+    <div className="row px-4">
+                    <label className="label-title-image" htmlFor="choose_file">
+                        ¿Tienes una imagen de tu proyecto? súbela aquí
+                    </label>
+                    <label className="label-name-image col-6">
+                        <span id="file_name">{'name'}</span>
+                    </label>
+                    <div
+                        className="container-image col-4 w-25"
                         onMouseOver={handleMouseOverImg}
-                    />
+                        onMouseOut={handleMouseOverImg}
+                    >
+                        <img
+                            htmlFor="choose_file"
+                            src={
+                                imgHover ? '/img/subir_hover.png' : '/img/subir.png'
+                            }
+                            alt="save"
+                            onMouseOver={handleMouseOverImg}
+                        />
+                        <input
+                            type="file"
+                            accept="image/*"
+                            name="choose_file"
+                            id="choose_file"
+                            className="inputfile custom"
+                            onChange={handleInputFile}
+                        />
+                    </div>
+                </div>
+                {/* Segunda fila: nombre del proyecto, slogan del proyecto y descripción */}
+                <div className="titulo col-12 col-sm-5  align-content-center justify-content-center pt-5">
+                    <label htmlFor="profesion" style={{ paddingLeft: '7px' }}>
+                        Nombre del Proyecto
+                    </label>
                     <input
-                        type="file"
-                        accept="image/*"
-                        name="choose_file"
-                        id="choose_file"
-                        className="inputfile custom"
-                        onChange={handleInputFile}
+                        type="text"
+                        name="profesion"
+                        value={'aboutme?.profesion'}
+                        onChange={handleOnchange}
                     />
                 </div>
-            </div>
-            <div className="titulo col-12 col-sm-5  align-content-center justify-content-center pt-5">
-                <label htmlFor="profesion" style={{ paddingLeft: '7px' }}>
-                    Nombre del Proyecto
-                </label>
-                <input
-                    type="text"
-                    name="profesion"
-                    value={'aboutme?.profesion'}
-                    onChange={handleOnchange}
-                />
-            </div>
-        </>
+        </div>
+       
+      
     );
 };

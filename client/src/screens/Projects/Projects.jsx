@@ -31,18 +31,21 @@ export const Projects = () => {
                 >
                     <div className="row ">
                         <>
-                            <div className="row px-4">
-                                <label
-                                    className="label-title-image"
-                                    htmlFor="choose_file"
-                                >
-                                    Imagen del Proyecto
-                                </label>
-                                <label className="label-name-image col-6">
-                                    <span id="file_name">{'name'}</span>
-                                </label>
+                            <div className="row px-4 d-flex flex-row">
+                                <div className='row col-md-4 mt-5'>
+                                    <label
+                                        className="label-title-image"
+                                        htmlFor="choose_file"
+                                    >
+                                        Imagen del Proyecto
+                                    </label>
+                                    <label className="label-name-image col-6">
+                                        <span id="file_name">{'name'}</span>
+                                    </label>
+                                </div>
+                               
                                 <div
-                                    className="container-image col-4 w-25"
+                                    className="container-image col-4 w-25 mt-5"
                                     onMouseOver={handleMouseOverImg}
                                     onMouseOut={handleMouseOverImg}
                                 >
@@ -69,7 +72,7 @@ export const Projects = () => {
                             <div className="titulo col-12 col-sm-5  align-content-center justify-content-center pt-5">
                                 <label
                                     htmlFor="profesion"
-                                    style={{ paddingLeft: '7px' }}
+                                    className="mb-3"
                                 >
                                     Nombre del Proyecto
                                 </label>
@@ -85,7 +88,8 @@ export const Projects = () => {
                             <div className="titulo col-12 col-sm-5  align-content-center justify-content-center pt-5 ps-0">
                                 <label
                                     htmlFor="profesion"
-                                    style={{ paddingLeft: '7px' }}
+                                    
+                                    className="mb-3"
                                 >
                                     Slogan del Proyecto
                                 </label>
@@ -97,7 +101,7 @@ export const Projects = () => {
                                 />
                             </div>
                             <div id="div-textarea" className="titulo  col-sm-5">
-                                <label htmlFor="description">
+                                <label htmlFor="description" className='mb-3'>
                                     Descripcion del Proyecto
                                 </label>
                                 <textarea
@@ -109,22 +113,21 @@ export const Projects = () => {
                                 />
                             </div>
                         </div>
-
-                        <button
-                            type="button"
-                            className="btn-upload col-sm-4 text-center"
-                        >
-                            Agregar otro proyecto
-                        </button>
-                        <button
-                            type="submit"
-                            className="btn-upload col-sm-4 text-center"
-                        >
-                            <div className="container-button-img">
-                                <img src="/img/save.png" alt="save" />
-                            </div>
-                            Guardar
-                        </button>
+                        <div className='row d-flex justify-content-around align-items-center'>
+                            <button
+                                 type="button"
+                                 className=" text-center button-transparent col-md-6 col-sm-10"
+                            >
+                              Agregar otro proyecto
+                            </button>
+                             <button
+                                type="submit"
+                                className="btn-upload col-sm-4 text-center col-md-6 col-sm-10"
+                                >
+                                Guardar
+                            </button>
+                        </div>
+                       
                     </div>
                 </form>
             </div>

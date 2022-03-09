@@ -22,28 +22,28 @@ export const Contact = ({ user }) => {
             <div className="contact container">
                 <div>
                     <h1 className="section-title">
-                        Contact <span>info</span>
+                        información de <span>contacto</span>
                     </h1>
                 </div>
                 <div className="contact-items">
                     {telefono && (
                         <ItemContact
                             icon={icons.phone}
-                            tittle={'Phone'}
+                            tittle={'Teléfono'}
                             subtittle={telefono}
                         />
                     )}
                     {email && (
                         <ItemContact
                             icon={icons.email}
-                            tittle={'Email'}
+                            tittle={'Mail'}
                             subtittle={email}
                         />
                     )}
                     {direccion && (
                         <ItemContact
                             icon={icons.adrdres}
-                            tittle={'Adress'}
+                            tittle={'Dirección'}
                             subtittle={direccion}
                         />
                     )}

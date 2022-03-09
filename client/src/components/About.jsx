@@ -13,7 +13,7 @@ export const About = ({ user }) => {
                 </div>
                 <div className="col-right">
                     <h1 className="section-title">
-                        About <span>me</span>
+                        Sobre <span>mi</span>
                     </h1>
                     {aboutme && (
                         <>
@@ -22,7 +22,7 @@ export const About = ({ user }) => {
                         </>
                     )}
                     <a href={`${Url}/user/cv/${_id}`} target="_blank" rel="noreferrer" className="cta">
-                        Download Resume
+                        Descargar CV
                     </a>
                 </div>
             </div>

@@ -61,7 +61,8 @@ export const Origin = () => {
                         <div className="titulo col-12 align-content-center justify-content-center pt-5">
                             <label
                                 htmlFor="nombreCompleto"
-                                style={{ paddingLeft: '7px' }}
+                                className="mb-3"
+                
                             >
                                 Nombre
                             </label>
@@ -75,7 +76,7 @@ export const Origin = () => {
                         <div className="titulo col-12 align-content-center justify-content-center pt-5">
                             <label
                                 htmlFor="email"
-                                style={{ paddingLeft: '7px' }}
+                                className="mb-3"
                             >
                                 Usuario
                             </label>
@@ -89,9 +90,9 @@ export const Origin = () => {
                         <div className="titulo col- 12 align-content-center justify-content-center pt-5">
                             <label
                                 htmlFor="password"
-                                style={{ paddingLeft: '7px' }}
+                                className="mb-3"
                             >
-                                Password
+                                Contraseña
                             </label>
                             <input
                                 type="text"
@@ -100,8 +101,8 @@ export const Origin = () => {
                             />
                         </div>
                         <div className="titulo col- 12 align-content-center justify-content-center pt-5">
-                            <label htmlFor="url" style={{ paddingLeft: '7px' }}>
-                                Link de Porfolio
+                            <label htmlFor="url">
+                                Puedes ver tu portfolio aquí
                             </label>
                             <a href={url} target="_blank" rel="noreferrer">
                                 {url}
@@ -111,9 +112,7 @@ export const Origin = () => {
                             type="submit"
                             className="btn-upload col-sm-6 text-center"
                         >
-                            <div className="container-button-img">
-                                <img src="/img/save.png" alt="save" />
-                            </div>
+                            
                             Guardar
                         </button>
                     </div>

@@ -9,7 +9,7 @@ export const Services = ({user}) => {
             <div className="services container">
                 <div className="service-top">
                     <h1 className="section-title">
-                        Serv<span>i</span>ces
+                       Experiencia<span> laboral</span>
                     </h1>
                     {services2 && <p>
                         {service.general}

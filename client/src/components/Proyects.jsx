@@ -11,7 +11,7 @@ export const Proyects = ({user}) => {
             <div className="projects container">
                 <div className="projects-header">
                     <h1 className="section-title">
-                        Recent <span>Projects</span>
+                       Mis <span>Pproyectos</span>
                     </h1>
                 </div>
                 <div className="all-projects">
