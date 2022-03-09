@@ -24,7 +24,6 @@ export const Service = () => {
             description: '',
         };
         setServices({ ...services, ...service });
-        console.log(services);
     };
 
     const handleChange = (e) => {
@@ -52,7 +51,6 @@ export const Service = () => {
                     : null
             )
             .filter((element) => element !== null);
-        console.log(serv);
         updateUser(user, token, null, null, serv, null);
         loadData(user, token);
     };

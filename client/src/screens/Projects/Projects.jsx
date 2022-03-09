@@ -1,22 +1,80 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Projects.css';
 import logo from '../../assets/img/logo_coder.png';
 import { useState } from 'react';
+import { Project } from './Project';
+import { useEffect } from 'react';
+import { loadDataUser } from '../../helpers/loadDataUser';
+import { UserContext } from '../../context/UserContext';
+import { updateUser } from '../../helpers/updateUser';
 
 export const Projects = () => {
     const [imgHover, setImgHover] = useState(false);
-    const handleMouseOverImg = () => {
-      setImgHover(!imgHover);
-      console.log('hover');
-    };
-    const handleInputFile = () => {};
-  const handleOnchange = () => { };
-  
-  const handleAddProject = () => {
-    
-  }
+    const [projects, setProjects] = useState({});
 
-    const handleSubmit = () => {};
+    const { stateUser } = useContext(UserContext);
+    const { user } = stateUser;
+    const { data } = stateUser;
+    const { token } = data;
+
+    const handleAddProject = () => {
+        setProjects({
+            ...projects,
+            [`project${Object.keys(projects).length + 1}`]: {
+                title: '',
+                subtitle: '',
+                description: '',
+            },
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const inputsText = [...e.target].filter(
+                (element) => element.name !== '' && element.value !== '' && element.type !== 'file'
+        )
+        const inputsFiles = [...e.target].filter(
+            (element) =>
+                element.name !== '' &&
+                element.value !== '' &&
+                element.type === 'file'
+        );
+
+        const projects = { recentproyects: {} }
+        const imgProyects = inputsFiles.map((element) => element.files[0])
+
+        inputsText
+            .map(
+                (element, index) =>
+                    (index + 1) % 3 === 0 &&
+                    (projects.recentproyects[`project${(index + 1) / 3}`] = {
+                        [inputsText[index - 2].name]: inputsText[index - 2].value,
+                        [inputsText[index - 1].name]: inputsText[index - 1].value,
+                        [inputsText[index].name]: inputsText[index].value,
+                    })
+            )
+            .filter((element) => element !== false); 
+        console.log(
+            imgProyects
+        );
+
+        updateUser(user, token, null, imgProyects, projects, null);
+        loadData(user, token);
+    };
+
+    const loadData = async (_id, tokens) => {
+        const dataResponse = await loadDataUser(_id, tokens);
+        const { user } = dataResponse;
+        user.recentproyects
+            ? setProjects({ ...user.recentproyects })
+            : setProjects({
+                  proyect1: { title: '', subtitle: '', description: '' },
+              });
+    };
+
+    useEffect(() => {
+        loadData(user, token);
+    }, [user, token]);
 
     return (
         <div id="projects" className="container row d-flex align-items-center">
@@ -30,89 +88,14 @@ export const Projects = () => {
                     className="d-flex justify-content-end col-md-10"
                 >
                     <div className="row ">
-                        <>
-                            <div className="row px-4">
-                                <label
-                                    className="label-title-image"
-                                    htmlFor="choose_file"
-                                >
-                                    Imagen del Proyecto
-                                </label>
-                                <label className="label-name-image col-6">
-                                    <span id="file_name">{'name'}</span>
-                                </label>
-                                <div
-                                    className="container-image col-4 w-25"
-                                    onMouseOver={handleMouseOverImg}
-                                    onMouseOut={handleMouseOverImg}
-                                >
-                                    <img
-                                        htmlFor="choose_file"
-                                        src={
-                                            imgHover
-                                                ? '/img/subir_hover.png'
-                                                : '/img/subir.png'
-                                        }
-                                        alt="save"
-                                        onMouseOver={handleMouseOverImg}
-                                    />
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        name="choose_file"
-                                        id="choose_file"
-                                        className="inputfile custom"
-                                        onChange={handleInputFile}
-                                    />
-                                </div>
-                            </div>
-                            <div className="titulo col-12 col-sm-5  align-content-center justify-content-center pt-5">
-                                <label
-                                    htmlFor="profesion"
-                                    style={{ paddingLeft: '7px' }}
-                                >
-                                    Nombre del Proyecto
-                                </label>
-                                <input
-                                    type="text"
-                                    name="profesion"
-                                    value={'aboutme?.profesion'}
-                                    onChange={handleOnchange}
-                                />
-                            </div>
-                        </>
-                        <div className="row px-4">
-                            <div className="titulo col-12 col-sm-5  align-content-center justify-content-center pt-5 ps-0">
-                                <label
-                                    htmlFor="profesion"
-                                    style={{ paddingLeft: '7px' }}
-                                >
-                                    Slogan del Proyecto
-                                </label>
-                                <input
-                                    type="text"
-                                    name="profesion"
-                                    value={'aboutme?.profesion'}
-                                    onChange={handleOnchange}
-                                />
-                            </div>
-                            <div id="div-textarea" className="titulo  col-sm-5">
-                                <label htmlFor="description">
-                                    Descripcion del Proyecto
-                                </label>
-                                <textarea
-                                    type="text"
-                                    name="description"
-                                    rows="10"
-                                    value={'aboutme?.description'}
-                                    onChange={handleOnchange}
-                                />
-                            </div>
-                        </div>
+                        {Object.values(projects).map((project, index) => (
+                            <Project key={index} project={project} />
+                        ))}
 
                         <button
                             type="button"
                             className="btn-upload col-sm-4 text-center"
+                            onClick={handleAddProject}
                         >
                             Agregar otro proyecto
                         </button>

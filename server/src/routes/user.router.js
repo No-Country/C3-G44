@@ -14,6 +14,7 @@ import {
     logoutUser,
     terminos,
     viewCVUser,
+    removeProject,
 } from '../controller/user.controller';
 
 import { verifyToken } from '../libs/VerifyToken';
@@ -58,6 +59,9 @@ router.get('/data/:id', verifyToken, getDataAuthUserId)
 
 // Actualizar Usuarios
 router.put('/update/:id', upload.single('avatar'), verifyToken, updateUser);
+
+// Remove Project
+router.delete('/removeproject/:id', verifyToken, removeProject)
 
 // Delete Usuario
 router.delete('/delete/:id', verifyToken, deleteUser);

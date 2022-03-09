@@ -15,7 +15,7 @@ export const Proyects = ({user}) => {
                     </h1>
                 </div>
                 <div className="all-projects">
-                    {proyects && proyects.map(({ title, subtitle = 'Coding is Love', description}, index) => (
+                    {proyects && proyects.map(({ title, subtitle, description}, index) => (
                         <Proyect
                             tittle={title}
                             subtittle={subtitle}
