@@ -3,15 +3,15 @@
     padding-left: 150px;
 }
 
-#about-home .label-title-image{
+#about-home .label-title-image {
     display: flex;
     font-size: 15px;
     margin-top: 10px;
     margin-bottom: -30px;
+
 }
 
-#about-home .label-name-image{
-    border-bottom: 3px #000000 solid;
+#about-home .label-name-image {
     padding-top: 28px;
 }
 
@@ -26,7 +26,7 @@
     /* background-image: url(../../assets/img/save.png); */
 }
 
-#about-home .custom + label {
+#about-home .custom+label {
     border: 1px;
     color: #000000;
     padding: 0;
@@ -77,13 +77,13 @@
     /* margin-bottom: 10px; */
     font-size: 13px;
     max-height: 87px;
-    width: 70% ;
+    width: 70%;
     min-height: 10vh;
     min-width: 50vh;
     padding: 3px;
 }
 
-#about-home .label-cv-name{
+#about-home .label-cv-name {
     display: flex;
     font-size: 15px;
     margin-top: 10px;
@@ -92,9 +92,9 @@
 
 #about-home .label-cv {
     width: 37%;
-    border-bottom: 3px #000000 solid;
     padding-top: 28px;
 }
+
 /* Inicio boton Upload */
 #about-home .btn-upload {
     height: 40px;
@@ -107,6 +107,7 @@
     border: 2px solid #f1623f;
     border-radius: 30px;
     font-size: 15px;
+    color: #ffffff;
 }
 
 #about-home .btn-upload:hover {
@@ -116,8 +117,8 @@
     /* filter: brightness(85%); */
 }
 
-#about-home .btn-upload .container-button-img{
-    width: 32px; 
+#about-home .btn-upload .container-button-img {
+    width: 32px;
     height: 32px;
     display: inline-block;
     margin-right: 2px;
@@ -129,6 +130,7 @@
     #about-home .label-cv {
         width: 38%;
     }
+
     #about-home .btn-upload {
         width: 37%;
     }
@@ -140,6 +142,7 @@
         margin-top: 15px;
         width: 65%;
     }
+
     #about-home .titulo textarea {
         margin-bottom: 15px;
     }

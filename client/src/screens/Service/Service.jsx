@@ -24,7 +24,6 @@ export const Service = () => {
             description: '',
         };
         setServices({ ...services, ...service });
-        console.log(services);
     };
 
     const handleChange = (e) => {
@@ -34,7 +33,7 @@ export const Service = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const inputs = [...e.target].filter(
-            (element) => element.name !== '' && element.value !== ''
+            (element) => element.type === "text" || element.type === "textarea" || element.type === "date"
         );
         const serv = { service: {} };
         inputs
@@ -52,7 +51,6 @@ export const Service = () => {
                     : null
             )
             .filter((element) => element !== null);
-        console.log(serv);
         updateUser(user, token, null, null, serv, null);
         loadData(user, token);
     };
@@ -77,7 +75,7 @@ export const Service = () => {
             id="service"
             className="container row m-auto  p-5 d-flex align-items-center"
         >
-            <div className="d-flex justify-content-end col-md-10">
+            <div className="d-flex justify-content-end">
                 <img src={logo} alt="Logo Coder" className="col-md-2" />
             </div>
             <form
@@ -111,9 +109,10 @@ export const Service = () => {
                     </button>
                 </div>
                 <div className=" col-md-10 d-flex justify-content-center mb-5">
-                    <button className="button-orange px-5 py-3">Subir</button>
+                    <button className="btn-upload px-5 py-3">Subir</button>
                 </div>
             </form>
         </div>
     );
 };
+

@@ -23,7 +23,6 @@ export const Porfolio = () => {
             const dataResponse = await loadDataUser(_id, token);
             const { data, user } = dataResponse;
           setDataUser(user);
-          console.log('user en porfolio', dataResponse, token);
             dispatchUser({
                 type: UserTypes.load,
                 payload: { data, user: user._id },

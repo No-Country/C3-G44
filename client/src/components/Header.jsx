@@ -55,7 +55,7 @@ export const Header = ({ user }) => {
                                     data-after="About"
                                     onClick={handleToggle}
                                 >
-                                    About
+                                    Sobre mi
                                 </a>
                             </li>
                             <li>
@@ -64,7 +64,7 @@ export const Header = ({ user }) => {
                                     data-after="Service"
                                     onClick={handleToggle}
                                 >
-                                    Services
+                                    Experiencia laboral
                                 </a>
                             </li>
                             <li>
@@ -73,7 +73,7 @@ export const Header = ({ user }) => {
                                     data-after="Projects"
                                     onClick={handleToggle}
                                 >
-                                    Projects
+                                   proyectos
                                 </a>
                             </li>
                             <li>
@@ -82,13 +82,13 @@ export const Header = ({ user }) => {
                                     data-after="Contact"
                                     onClick={handleToggle}
                                 >
-                                    Contact
+                                    Contacto
                                 </a>
                             </li>
                             <li>
                                 {auth && (
                                     <Link to="/home" data-after="Back">
-                                        Update
+                                       Actualizar
                                     </Link>
                                 )}
                             </li>
@@ -99,7 +99,7 @@ export const Header = ({ user }) => {
                                         to="/"
                                         data-after="Logout"
                                     >
-                                        Logout
+                                        Salir
                                     </Link>
                                 )}
                             </li>

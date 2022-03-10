@@ -1,3 +1,4 @@
-export const Url = 'http://localhost:4000';
+// export const Url = 'http://localhost:4000';
+export const Url = 'https://coderporfolioserver.herokuapp.com';
 
-export const UrlClient = 'http://localhost:3000'
+export const UrlClient = 'https://coderporfolio.herokuapp.com';

@@ -33,10 +33,13 @@ export const createUser = async (req, res) => {
             await user.save();
 
             res.status(200).json({
-                auth: true,
-                mensaje: 'Registro exitoso',
-                id: user._id,
-                token,
+                data: {
+                    auth: true,
+                    mensaje: 'Bienvenido ' + user.nombreCompleto,
+                    token,
+                    rol: user.rol,
+                },
+                user: user._id,
             });
         }
     } catch (error) {
@@ -57,7 +60,9 @@ export const getUserMailPass = async (req, res) => {
 
     // Verifico si no se encontro el email en base de datos
     if (!user) {
-        return res.json({data: {auth: false, mensaje: 'Email no esta registrado'} });
+        return res.json({
+            data: { auth: false, mensaje: 'Email no esta registrado' },
+        });
     }
 
     // Si el usuario existe comparo contraseña
@@ -69,9 +74,11 @@ export const getUserMailPass = async (req, res) => {
     // Si la validacion de contraseña es incorrecta
     if (!validPassword) {
         return res.json({
-            data: {auth: false,
-            token: null,
-            mensaje: 'Contraseña incorrecta',}
+            data: {
+                auth: false,
+                token: null,
+                mensaje: 'Contraseña incorrecta',
+            },
         });
     }
 
@@ -99,17 +106,18 @@ export const getUserId = async (req, res) => {
     const _id = req.params.id;
 
     try {
-        const user = await User.findOne({ _id }, { avatar: 0, imgProyects: 0 }).select(
-            '-password'
-        );
+        const user = await User.findOne(
+            { _id },
+            { avatar: 0, imgProyects: 0 }
+        ).select('-password');
         user.password = undefined;
         user.avatar = undefined;
         user.imgProyects = undefined;
-        res.json({ data: {auth: false, token: null}, user });
+        res.json({ data: { auth: false, token: null }, user });
     } catch (error) {
-        return res
-            .status(400)
-            .json({ data: {auth: false, mensaje: 'Ocurrio un error', error} });
+        return res.status(400).json({
+            data: { auth: false, mensaje: 'Ocurrio un error', error },
+        });
     }
 };
 
@@ -120,14 +128,15 @@ export const getDataAuthUserId = async (req, res) => {
     console.log(token);
 
     try {
-        const user = await User.findOne({ _id }, { avatar: 0, imgProyects: 0, cv: 0 }).select(
-            '-password'
-        );
+        const user = await User.findOne(
+            { _id },
+            { avatar: 0, imgProyects: 0, cv: 0 }
+        ).select('-password');
         res.json({ data: { auth: true, token }, user });
     } catch (error) {
-        return res
-            .status(400)
-            .json({ data: {auth: false, mensaje: 'Ocurrio un error', error} });
+        return res.status(400).json({
+            data: { auth: false, mensaje: 'Ocurrio un error', error },
+        });
     }
 };
 
@@ -255,6 +264,105 @@ export const updateUser = async (req, res) => {
             err,
         });
     }
+};
+
+// actualizar Proyecto de usuario
+export const updateProject = async (req, res) => {
+    const _id = req.params.id;
+    const project = req.body;
+    const img = req.file;
+    const { number, title, subtitle, description } = project;
+
+    const body = {};
+
+    try {
+        const user = await User.findOne(
+            { _id },
+            {
+                email: 0,
+                nombreCompleto: 0,
+                rol: 0,
+                aboutme: 0,
+                service: 0,
+                avatar: 0,
+                contactinfo: 0,
+                cv: 0,
+            }
+        ).select('-password');
+
+        if (img) {
+            const imgProyects = [...user.imgProyects] ?? [];
+            const data = img.buffer;
+            const contentType = img.mimetype;
+            const name = `proyect${number}`;
+            const project = {data, name, contentType}
+            imgProyects.splice(number, 1, project)
+            body['imgProyects'] = imgProyects;
+        }
+
+        const recentproyects = user.recentproyects ?? {};
+
+        recentproyects[`project${number}`] = { title, subtitle, description };
+        body['recentproyects'] = recentproyects;
+        
+        // console.log(body.imgProyects);
+        
+        const registro = await User.findByIdAndUpdate(_id, body, {
+            new: true,
+        });
+        res.status(200).json({
+            auth: true,
+            id: registro._id,
+            mensaje: 'Actualizacion Exitosa',
+        });
+
+    } catch (error) {}
+};
+
+// Eliminar Proyecto de usuario
+export const removeProject = async (req, res) => {
+    const _id = req.params.id;
+    const {data} = req.body;
+
+    const body = {};
+
+    try {
+        const user = await User.findOne(
+            { _id },
+            {
+                email: 0,
+                nombreCompleto: 0,
+                rol: 0,
+                about: 0,
+                service: 0,
+                avatar: 0,
+                contactinfo: 0,
+            }
+        ).select('-password');
+
+        
+        const imgProyects = user.imgProyects;
+        imgProyects.splice(data, 1);
+
+        body['imgProyects'] = imgProyects;
+
+        const recentproyects = user.recentproyects;
+        delete recentproyects[`project${data}`];
+
+        body['recentproyects'] = recentproyects;
+        
+
+        const registro = await User.findByIdAndUpdate(_id, body, {
+            new: true,
+        });
+
+
+        res.status(200).json({
+            auth: true,
+            id: registro._id,
+            mensaje: 'Actualizacion Exitosa',
+        });
+    } catch (error) {}
 };
 
 // Eliminar un usuario

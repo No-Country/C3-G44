@@ -97,12 +97,13 @@ export const Contact = () => {
                 onSubmit={handleOnSubmit}
             >
                 <div className="col-md-10">
-                    <div className="col-md-12 mx-auto">
+                    <div className="col-md-12 mx-auto mt.2">
                         {Object.values(direccion).map((value, index) => (
                             <Direccion
                                 key={index}
                                 number={index + 1}
                                 value={value}
+                    
                             />
                         ))}
                         <button

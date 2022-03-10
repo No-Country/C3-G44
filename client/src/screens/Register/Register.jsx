@@ -1,25 +1,45 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Axios from 'axios'
 
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+import { UserContext } from '../../context/UserContext';
 import { registerUser } from '../../helpers/registerUser';
 
 import './Register.css';
+import { UserTypes } from '../../types/UserTypes';
 
 export const Register = () => {
     const navigate = useNavigate();
+    const { dispatchUser } = useContext(UserContext);
     const [eyed, setEyed] = useState(true);
 
     const handleEye = () => {
         setEyed(!eyed);
     };
-    
-    const handleSubmit = async (e) => {
-        const response = await registerUser(e);
-        console.log(response);
-        response.auth && navigate('/home')
+
+    const registerUser = async (user) => {
+        await Axios.post('/user/create', user)
+            .then((respuesta) => {
+                if (respuesta.data.data.auth) {
+                    dispatchUser({
+                        type: UserTypes.load,
+                        payload: respuesta.data,
+                    });
+                    navigate(`/home`);
+                } else {
+                    alert(respuesta.data.data.mensaje);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const handleSubmit = (e) => {
+        registerUser(e);
     };
 
     return (
@@ -78,11 +98,12 @@ export const Register = () => {
                                     name="nombreCompleto"
                                     className="cta px-3 col-md-10 mx-auto col-sm-10"
                                 />
-                                {errors.nombreCompleto && touched.nombreCompleto && (
-                                    <p className="px-3 col-sm-10 col-md-10 mx-auto">
-                                        {errors.nombreCompleto}
-                                    </p>
-                                )}
+                                {errors.nombreCompleto &&
+                                    touched.nombreCompleto && (
+                                        <p className="px-3 col-sm-10 col-md-10 mx-auto">
+                                            {errors.nombreCompleto}
+                                        </p>
+                                    )}
                                 <label
                                     htmlFor="email"
                                     className="px-3 col-sm-10 col-md-10 mx-auto"

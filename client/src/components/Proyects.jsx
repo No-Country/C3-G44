@@ -11,11 +11,11 @@ export const Proyects = ({user}) => {
             <div className="projects container">
                 <div className="projects-header">
                     <h1 className="section-title">
-                        Recent <span>Projects</span>
+                       Mis <span>Pproyectos</span>
                     </h1>
                 </div>
                 <div className="all-projects">
-                    {proyects && proyects.map(({ title, subtitle = 'Coding is Love', description}, index) => (
+                    {proyects && proyects.map(({ title, subtitle, description}, index) => (
                         <Proyect
                             tittle={title}
                             subtittle={subtitle}
