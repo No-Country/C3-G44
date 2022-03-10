@@ -112,11 +112,9 @@ export const getUserId = async (req, res) => {
         user.imgProyects = undefined;
         res.json({ data: { auth: false, token: null }, user });
     } catch (error) {
-        return res
-            .status(400)
-            .json({
-                data: { auth: false, mensaje: 'Ocurrio un error', error },
-            });
+        return res.status(400).json({
+            data: { auth: false, mensaje: 'Ocurrio un error', error },
+        });
     }
 };
 
@@ -133,11 +131,9 @@ export const getDataAuthUserId = async (req, res) => {
         ).select('-password');
         res.json({ data: { auth: true, token }, user });
     } catch (error) {
-        return res
-            .status(400)
-            .json({
-                data: { auth: false, mensaje: 'Ocurrio un error', error },
-            });
+        return res.status(400).json({
+            data: { auth: false, mensaje: 'Ocurrio un error', error },
+        });
     }
 };
 
@@ -267,10 +263,63 @@ export const updateUser = async (req, res) => {
     }
 };
 
-// Eliminar Proyecto de usuario
-export const removeProject = (req, res) => {
+// actualizar Proyecto de usuario
+export const updateProject = async (req, res) => {
     const _id = req.params.id;
     const project = req.body;
+    const img = req.file;
+    const { number, title, subtitle, description } = project;
+
+    const body = {};
+
+    try {
+        const user = await User.findOne(
+            { _id },
+            {
+                email: 0,
+                nombreCompleto: 0,
+                rol: 0,
+                aboutme: 0,
+                service: 0,
+                avatar: 0,
+                contactinfo: 0,
+                cv: 0,
+            }
+        ).select('-password');
+
+        if (img) {
+            const imgProyects = [...user.imgProyects] ?? [];
+            const data = img.buffer;
+            const contentType = img.mimetype;
+            const name = `proyect${number}`;
+            const project = {data, name, contentType}
+            imgProyects.splice(number, 1, project)
+            body['imgProyects'] = imgProyects;
+        }
+
+        const recentproyects = user.recentproyects ?? {};
+
+        recentproyects[`project${number}`] = { title, subtitle, description };
+        body['recentproyects'] = recentproyects;
+        
+        // console.log(body.imgProyects);
+        
+        const registro = await User.findByIdAndUpdate(_id, body, {
+            new: true,
+        });
+        res.status(200).json({
+            auth: true,
+            id: registro._id,
+            mensaje: 'Actualizacion Exitosa',
+        });
+
+    } catch (error) {}
+};
+
+// Eliminar Proyecto de usuario
+export const removeProject = async (req, res) => {
+    const _id = req.params.id;
+    const {data} = req.body;
 
     const body = {};
 
@@ -288,20 +337,23 @@ export const removeProject = (req, res) => {
             }
         ).select('-password');
 
-        const imgProjects = user.imgProyects;
-        imgProjects.splice(project, 1);
+        
+        const imgProyects = user.imgProyects;
+        imgProyects.splice(data, 1);
 
-        body[imgProjects] = imgProjects;
+        body['imgProyects'] = imgProyects;
 
-        const recentprojects = user.recentprojects;
-        delete recentprojects[`project${project}`];
+        const recentproyects = user.recentproyects;
+        delete recentproyects[`project${data}`];
 
-        body['recentprojects'] = recentprojects;
+        body['recentproyects'] = recentproyects;
+        
 
         const registro = await User.findByIdAndUpdate(_id, body, {
             new: true,
         });
-        
+
+
         res.status(200).json({
             auth: true,
             id: registro._id,

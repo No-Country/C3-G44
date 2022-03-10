@@ -63,10 +63,6 @@ export const Puesto = ({ service, number }) => {
                     onChange={handleChange}
                 />
             </div>
-            {/* <div className="row mb-5">
-              <h3 className="col-md-4 mt-3">¿Querés agregar una imagen?</h3>
-              <input type="file" name="" className="col-md-6 mt-3" />
-          </div> */}
         </div>
     );
 };

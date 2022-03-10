@@ -65,7 +65,7 @@ export const Projects = () => {
     const loadData = async (_id, tokens) => {
         const dataResponse = await loadDataUser(_id, tokens);
         const { user } = dataResponse;
-        user.recentproyects
+        user?.recentproyects
             ? setProjects({ ...user.recentproyects })
             : setProjects({
                   proyect1: { title: '', subtitle: '', description: '' },
@@ -82,34 +82,18 @@ export const Projects = () => {
                 <div className="d-flex justify-content-end col-md-10">
                     <img src={logo} alt="Logo Coder" className="col-md-2" />
                 </div>
-                <form
-                    action=""
-                    onSubmit={handleSubmit}
-                    className="d-flex justify-content-end col-md-10"
-                >
-                    <div className="row ">
-                        {Object.values(projects).map((project, index) => (
-                            <Project key={index} project={project} />
-                        ))}
 
-                        <button
-                            type="button"
-                            className="btn-upload col-sm-4 text-center"
-                            onClick={handleAddProject}
-                        >
-                            Agregar otro proyecto
-                        </button>
-                        <button
-                            type="submit"
-                            className="btn-upload col-sm-4 text-center"
-                        >
-                            <div className="container-button-img">
-                                <img src="/img/save.png" alt="save" />
-                            </div>
-                            Guardar
-                        </button>
-                    </div>
-                </form>
+                {Object.values(projects).map((project, index) => (
+                    <Project key={index} project={project} number={index} user={user} token={token} loadData={() => loadData() }/>
+                ))}
+                
+                <button
+                    type="button"
+                    className="btn-upload col-sm-4 text-center"
+                    onClick={handleAddProject}
+                >
+                    Agregar otro proyecto
+                </button>
             </div>
         </div>
     );

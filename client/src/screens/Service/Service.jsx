@@ -33,7 +33,7 @@ export const Service = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const inputs = [...e.target].filter(
-            (element) => element.name !== '' && element.value !== ''
+            (element) => element.type === "text" || element.type === "textarea" || element.type === "date"
         );
         const serv = { service: {} };
         inputs
@@ -51,6 +51,8 @@ export const Service = () => {
                     : null
             )
             .filter((element) => element !== null);
+        console.log(inputs);
+        console.log(serv.service);
         updateUser(user, token, null, null, serv, null);
         loadData(user, token);
     };

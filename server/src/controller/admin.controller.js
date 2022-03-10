@@ -299,9 +299,7 @@ export const updateDataUser = async (req, res) => {
     const user = new User({
         ...req.body,
     });
-
-    console.log(user);
-    console.log(req.body);
+    
     // Se encripta contraseña si la contraseña existe
     if (password && password !== '') {
         user.password = await user.encryptPassword(password);
