@@ -131,9 +131,6 @@ export const Project = ({ project, number, user, token, loadData }) => {
                         type="submit"
                         className="btn-upload col-sm-4 text-center"
                     >
-                        <div className="container-button-img">
-                            <img src="/img/save.png" alt="save" />
-                        </div>
                         Guardar
                     </button>
                 </div>

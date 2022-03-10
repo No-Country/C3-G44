@@ -1,15 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Projects.css';
 import logo from '../../assets/img/logo_coder.png';
-import { useState } from 'react';
 import { Project } from './Project';
-import { useEffect } from 'react';
 import { loadDataUser } from '../../helpers/loadDataUser';
 import { UserContext } from '../../context/UserContext';
-import { updateUser } from '../../helpers/updateUser';
 
 export const Projects = () => {
-    const [imgHover, setImgHover] = useState(false);
     const [projects, setProjects] = useState({});
 
     const { stateUser } = useContext(UserContext);
@@ -26,40 +22,6 @@ export const Projects = () => {
                 description: '',
             },
         });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const inputsText = [...e.target].filter(
-                (element) => element.name !== '' && element.value !== '' && element.type !== 'file'
-        )
-        const inputsFiles = [...e.target].filter(
-            (element) =>
-                element.name !== '' &&
-                element.value !== '' &&
-                element.type === 'file'
-        );
-
-        const projects = { recentproyects: {} }
-        const imgProyects = inputsFiles.map((element) => element.files[0])
-
-        inputsText
-            .map(
-                (element, index) =>
-                    (index + 1) % 3 === 0 &&
-                    (projects.recentproyects[`project${(index + 1) / 3}`] = {
-                        [inputsText[index - 2].name]: inputsText[index - 2].value,
-                        [inputsText[index - 1].name]: inputsText[index - 1].value,
-                        [inputsText[index].name]: inputsText[index].value,
-                    })
-            )
-            .filter((element) => element !== false); 
-        console.log(
-            imgProyects
-        );
-
-        updateUser(user, token, null, imgProyects, projects, null);
-        loadData(user, token);
     };
 
     const loadData = async (_id, tokens) => {
@@ -84,12 +46,19 @@ export const Projects = () => {
                 </div>
 
                 {Object.values(projects).map((project, index) => (
-                    <Project key={index} project={project} number={index} user={user} token={token} loadData={() => loadData() }/>
+                    <Project
+                        key={index}
+                        project={project}
+                        number={index}
+                        user={user}
+                        token={token}
+                        loadData={() => loadData()}
+                    />
                 ))}
-                
+
                 <button
                     type="button"
-                    className="btn-upload col-sm-4 text-center"
+                    className="btn-upload col-sm-4 text-center mb-5"
                     onClick={handleAddProject}
                 >
                     Agregar otro proyecto

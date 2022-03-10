@@ -27,8 +27,16 @@ export const LoginRouter = () => {
                         </PublicRouter>
                     }
                 />
+                <Route
+                    path="/register"
+                    element={
+                        <PublicRouter>
+                            <Register />
+                        </PublicRouter>
+                    }
+                />
                 {/*Inicio Rutas libres para trabajar sobre componentes y screens */}
-
+                {/* 
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/home/*" element={<Home />} />
@@ -37,7 +45,7 @@ export const LoginRouter = () => {
                 <Route path="/service" element={<Service />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/footer" element={<Footer />} />
+                <Route path="/footer" element={<Footer />} /> */}
 
                 {/*Fin Rutas libres para trabajar sobre componentes y screens */}
 

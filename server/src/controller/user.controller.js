@@ -33,10 +33,13 @@ export const createUser = async (req, res) => {
             await user.save();
 
             res.status(200).json({
-                auth: true,
-                mensaje: 'Registro exitoso',
-                id: user._id,
-                token,
+                data: {
+                    auth: true,
+                    mensaje: 'Bienvenido ' + user.nombreCompleto,
+                    token,
+                    rol: user.rol,
+                },
+                user: user._id,
             });
         }
     } catch (error) {

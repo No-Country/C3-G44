@@ -51,8 +51,6 @@ export const Service = () => {
                     : null
             )
             .filter((element) => element !== null);
-        console.log(inputs);
-        console.log(serv.service);
         updateUser(user, token, null, null, serv, null);
         loadData(user, token);
     };
