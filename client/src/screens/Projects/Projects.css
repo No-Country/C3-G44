@@ -14,10 +14,10 @@
     margin-bottom: -30px;
 }
 
-#projects .label-name-image {
+/* #projects .label-name-image {
     border-bottom: 3px #000000 solid;
     padding-top: 28px;
-}
+} */
 
 #projects .inputfile {
     cursor: pointer;
@@ -30,7 +30,7 @@
     /* background-image: url(../../assets/img/save.png); */
 }
 
-#projects .custom + label {
+#projects .custom+label {
     border: 1px;
     color: #000000;
     padding: 0;
@@ -99,6 +99,7 @@
     border-bottom: 3px #000000 solid;
     padding-top: 28px;
 }
+
 /* Inicio boton Upload */
 #projects .btn-upload {
     height: 40px;
@@ -111,6 +112,7 @@
     border: 2px solid #f1623f;
     border-radius: 30px;
     font-size: 15px;
+    color: #ffffff;
 }
 
 #projects .btn-upload:hover {
@@ -120,12 +122,30 @@
     /* filter: brightness(85%); */
 }
 
-#projects .btn-upload .container-button-img {
+#projects .button-transparent {
+    height: 40px;
+    width: 30%;
+    margin-top: 15px;
+    border-radius: 50px;
+    border-color: #FA5716;
+    color: #FA5716;
+    font-size: 15px;
+    background-color: transparent;
+}
+
+#projects .button-transparent:hover {
+    color: #ffffff;
+    background-color: #f1623f;
+    opacity: 1;
+    /* filter: brightness(85%); */
+}
+
+/* #projects .btn-upload .container-button-img {
     width: 32px;
     height: 32px;
     display: inline-block;
     margin-right: 2px;
-}
+} */
 
 /* Fin boton Upload */
 
@@ -133,6 +153,7 @@
     #projects .label-cv {
         width: 38%;
     }
+
     #projects .btn-upload {
         width: 37%;
     }
@@ -142,11 +163,19 @@
     #projects #div-textarea {
         margin-top: 20px;
     }
+
     #projects .btn-upload {
         margin-left: 1px;
         margin-top: 15px;
         width: 65%;
     }
+
+    #projects .button-transparent {
+        margin-left: 1px;
+        margin-top: 15px;
+        width: 65%;
+    }
+
     #projects .titulo textarea {
         margin-bottom: 15px;
     }

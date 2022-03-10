@@ -7,16 +7,16 @@ export const Banner = ({ user }) => {
             <div className="hero container">
                 <div>
                     <h1>
-                        Hello, <span></span>
+                        Hola, <span></span>
                     </h1>
                     <h1>
-                        My Name is <span></span>
+                        mi nombre es <span></span>
                     </h1>
                     <h1>
                         {user.nombreCompleto} <span></span>
                     </h1>
                     <a href="#projects" type="button" className="cta">
-                        Porfolio
+                        Portfolio
                     </a>
                 </div>
             </div>

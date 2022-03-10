@@ -57,21 +57,23 @@ export const About = () => {
     return (
         <div
             id="about-home"
-            className="container row d-flex align-items-center"
+            className="container row d-flex align-items-center "
         >
-            <div className="row ms-5">
-                <div className="d-flex justify-content-end col-md-10">
+            <div className="row ms-5 col-md-12 m-auto">
+                <div className="d-flex justify-content-end">
                     <img src={logo} alt="Logo Coder" className="col-md-2" />
                 </div>
                 <form
                     action=""
                     onSubmit={handleSubmit}
-                    className="d-flex justify-content-end col-md-10"
+                    className="d-flex justify-content-end"
                 >
-                    <div className="row ">
-                        <div className="row px-4">
-                            <label
-                                className="label-title-image"
+                    <div className="row">
+                         {/* Primera fila: Img personal e ícono */}
+                        <div className="row px-4 mt-3 ">
+                           <div className="col-md-4 mt-2">
+                           <label
+                                className="label-title-image mt-2"
                                 htmlFor="choose_file"
                             >
                                 Imagen Personal
@@ -79,7 +81,8 @@ export const About = () => {
                             <label className="label-name-image col-6">
                                 <span id="file_name">{name}</span>
                             </label>
-                            <div className="container-image col-4 w-25">
+                           </div>
+                            <div className="container-image col-4 w-25 mt-2">
                                 <img
                                     htmlFor="choose_file"
                                     src="/img/subir.png"
@@ -95,45 +98,52 @@ export const About = () => {
                                 />
                             </div>
                         </div>
-
-                        <div className="titulo col- 12 col-sm-5  align-content-center justify-content-center pt-5">
-                            <label
-                                htmlFor="profesion"
-                                style={{ paddingLeft: '7px' }}
-                            >
-                                Profesion
-                            </label>
-                            <input
-                                type="text"
-                                name="profesion"
-                                value={aboutme?.profesion}
-                                onChange={handleOnchange}
-                            />
+                        {/* Segunda fila: profesion + descripción de profesion */}
+                      <div className="row mt-2">
+                        <div className="titulo col-md-6 col-sm-12  align-content-center justify-content-between pt-5 mt-2">
+                                <label
+                                    htmlFor="profesion"
+                                    style={{ paddingLeft: '7px' }}
+                                    className="mt-2 mb-3"
+                                >
+                                    Profesion
+                                </label>
+                                <input
+                                    type="text"
+                                    name="profesion"
+                                    value={aboutme?.profesion}
+                                    onChange={handleOnchange}
+                                />
+                            </div>
+                            <div className="titulo col- 12 col-sm-12 col-md-6 mt-2">
+                                <label htmlFor="description mb-3 mt-3">
+                                    Describe tu Profesion
+                                </label>
+                                <textarea
+                                    type="text"
+                                    name="description"
+                                    rows="5"
+                                    value={aboutme?.description}
+                                    onChange={handleOnchange}
+                                />
                         </div>
-                        <div className="titulo col- 12 col-sm-7">
-                            <label htmlFor="description">
-                                Descripcion de Profesion
-                            </label>
-                            <textarea
-                                type="text"
-                                name="description"
-                                rows="5"
-                                value={aboutme?.description}
-                                onChange={handleOnchange}
-                            />
-                        </div>
-
-                        <div className="row px-4">
-                            <label
-                                className="label-cv-name"
-                                htmlFor="choose_cv"
-                            >
-                                Link CV/Resume
-                            </label>
-                            <label className="label-cv col-4">
-                                <span id="file_name_cv">{nameCV}</span>
-                            </label>
-                            <div className="container-image col-4 w-25">
+                      </div>
+                       
+                        {/* tercer fila: subir cv + boton guardar */}
+                        <div className="row px-4 mt-2">
+                          <div className="col-md-6 d-flex flex-row"> 
+                            <div className="col-md-8 mt-2 col-sm-12">
+                                    <label
+                                        className="label-cv-name "
+                                        htmlFor="choose_cv"
+                                    >
+                                        Sube aquí tu CV
+                                    </label>
+                                    <label className="label-cv col-4">
+                                        <span id="file_name_cv">{nameCV}</span>
+                                    </label>
+                                </div>
+                            <div className="container-image col-sm-12 w-25 mr-5">
                                 <img
                                     htmlFor="choose_cv"
                                     src="/img/subir.png"
@@ -148,13 +158,11 @@ export const About = () => {
                                     onChange={handleInputFileCV}
                                 />
                             </div>
+                            </div>
                             <button
                                 type="submit"
                                 className="btn-upload col-sm-4 text-center"
                             >
-                                <div className="container-button-img">
-                                    <img src="/img/save.png" alt="save" />
-                                </div>
                                 Guardar
                             </button>
                         </div>

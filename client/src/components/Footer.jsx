@@ -7,7 +7,7 @@ export const Footer = () => {
                 <div className="brand">
                     <img src="/img/logo_coder.png" alt="" />
                 </div>
-                <h2>Your Complete Web Solution</h2>
+                <h2>Soluciones web a tu medida</h2>
                 <div className="social-icon">
                     <div className="social-item">
                         <a href="#">

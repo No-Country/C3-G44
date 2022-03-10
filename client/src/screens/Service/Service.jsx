@@ -77,7 +77,7 @@ export const Service = () => {
             id="service"
             className="container row m-auto  p-5 d-flex align-items-center"
         >
-            <div className="d-flex justify-content-end col-md-10">
+            <div className="d-flex justify-content-end">
                 <img src={logo} alt="Logo Coder" className="col-md-2" />
             </div>
             <form
@@ -111,9 +111,10 @@ export const Service = () => {
                     </button>
                 </div>
                 <div className=" col-md-10 d-flex justify-content-center mb-5">
-                    <button className="button-orange px-5 py-3">Subir</button>
+                    <button className="btn-upload px-5 py-3">Subir</button>
                 </div>
             </form>
         </div>
     );
 };
+

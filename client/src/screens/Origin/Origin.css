@@ -1,4 +1,4 @@
-#origin{
+#origin {
     background-color: #ffffff;
 }
 
@@ -40,6 +40,7 @@
     border: 2px solid #f1623f;
     border-radius: 30px;
     font-size: 15px;
+    color: #ffffff;
 }
 
 #origin .btn-upload:hover {
@@ -49,8 +50,8 @@
     /* filter: brightness(85%); */
 }
 
-#origin .btn-upload .container-button-img{
-    width: 32px; 
+#origin .btn-upload .container-button-img {
+    width: 32px;
     height: 32px;
     display: inline-block;
     margin-right: 2px;
