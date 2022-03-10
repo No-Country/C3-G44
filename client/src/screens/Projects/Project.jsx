@@ -18,6 +18,7 @@ export const Project = ({ project, number, user, token, loadData }) => {
 
     const handleDelete = () => {
         deleteProject(user, token, number);
+        loadData(user, token);
     };
 
     const handleSubmit = (e) => {
@@ -31,12 +32,11 @@ export const Project = ({ project, number, user, token, loadData }) => {
 
         const inputFile = e.target[0].files[0];
 
-        const project = [inputsText[0], inputsText[1], inputsText[2]]
- 
+        const project = [inputsText[0], inputsText[1], inputsText[2]];
 
-        updateProject(user, token, inputFile, project, number)
+        updateProject(user, token, inputFile, project, number);
 
-        loadData(user, token);
+        // loadData(user, token);
     };
 
     return (
