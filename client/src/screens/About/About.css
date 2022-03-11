@@ -1,6 +1,7 @@
 #about-home {
     background-color: #ffffff;
-    padding-left: 150px;
+    /* padding-left: 150px; */
+    max-width: 90% !important;
 }
 
 #about-home .label-title-image {
@@ -67,7 +68,7 @@
     width: 100%;
 }
 
-#about-home .titulo textarea {
+#about-home .titulo .textarea {
     display: flex;
     border-style: none;
     border: 3px solid #000000;
@@ -77,9 +78,9 @@
     /* margin-bottom: 10px; */
     font-size: 13px;
     max-height: 87px;
-    width: 70%;
+    width: 70% !important;
     min-height: 10vh;
-    min-width: 50vh;
+    /*  min-width: 50vh; */
     padding: 3px;
 }
 

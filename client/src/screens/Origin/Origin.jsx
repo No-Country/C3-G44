@@ -44,18 +44,17 @@ export const Origin = () => {
     }, [user, token]);
 
     return (
-        <div id="origin" className="container">
+        <div id="origin" className="container row p-3">
             {/* <div className="d-flex justify-content-end col-md-10">
                 <img src={logo} alt="Logo Coder" className="col-md-2" />
             </div> */}
-            <div className="row">
-                <div className="d-flex justify-content-end col-md-10">
+                <div className="d-flex justify-content-end col-md-10 col-sm-12">
                     <img src={logo} alt="Logo Coder" className="col-md-2" />
                 </div>
                 <form
                     action=""
                     onSubmit={handleSubmit}
-                    className="row align-self-center col-sm-10 col-md-6 m-auto  py-3 my-auto"
+                    className="row align-self-center col-sm-12 col-md-10 m-auto  py-3 my-auto"
                 >
                     <div className="row">
                         <div className="titulo col-12 align-content-center justify-content-center pt-5">
@@ -100,14 +99,15 @@ export const Origin = () => {
                                 onChange={handleOnChange}
                             />
                         </div>
-                        <div className="titulo col- 12 align-content-center justify-content-center pt-5">
-                            <label htmlFor="url">
+                        <div className="titulo col-md-12 align-content-center justify-content-center pt-5">
+                            <label  htmlFor="url">
                                 Puedes ver tu portfolio aquí
                             </label>
-                            <a href={url} target="_blank" rel="noreferrer">
+                            <a id="url-portfolio" className="d-flex flex-wrap" href={url} target="_blank" rel="noreferrer">
                                 {url}
                             </a>
                         </div>
+                        <div className="d-flex justify-content-center">
                         <button
                             type="submit"
                             className="btn-upload col-sm-6 text-center"
@@ -116,8 +116,10 @@ export const Origin = () => {
                             Guardar
                         </button>
                     </div>
+                        </div>
+                       
                 </form>
             </div>
-        </div>
+        
     );
 };

@@ -81,7 +81,7 @@ export const Contact = () => {
     return (
         <div
             id="contact"
-            className="container row p-5 d-flex align-items-center m-auto"
+            className="container row p-5 d-flex align-items-top m-auto"
         >
             <div className="d-flex justify-content-end col-md-10">
                 <img

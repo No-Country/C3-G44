@@ -2,6 +2,10 @@
     background-color: #ffffff;
 }
 
+#origin img {
+    max-width: 40%;
+}
+
 #origin .titulo label {
     font-size: 15px;
     margin-top: 10px;
@@ -26,6 +30,11 @@
     display: block;
     margin-top: 15px;
     font-size: 15px;
+}
+
+#origin #url-portfolio {
+
+    max-width: 80%;
 }
 
 /* Inicio boton Upload */

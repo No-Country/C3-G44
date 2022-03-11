@@ -55,18 +55,18 @@ export const About = () => {
     }, [user, token]);
 
     return (
-        <div
+      <div
             id="about-home"
-            className="container row d-flex align-items-center "
+            className="row d-flex align-items-center " 
         >
-            <div className="row ms-5 col-md-12 m-auto">
+            <div className="row m-auto col-md-10 col-sm-12">
                 <div className="d-flex justify-content-end">
                     <img src={logo} alt="Logo Coder" className="col-md-2" />
                 </div>
                 <form
                     action=""
                     onSubmit={handleSubmit}
-                    className="d-flex justify-content-end"
+                    className="d-flex justify-content-end col-md-12 col-sm-12"
                 >
                     <div className="row">
                          {/* Primera fila: Img personal e ícono */}
@@ -115,7 +115,7 @@ export const About = () => {
                                     onChange={handleOnchange}
                                 />
                             </div>
-                            <div className="titulo col- 12 col-sm-12 col-md-6 mt-2">
+                            <div className="titulo col-sm-12 col-md-6 mt-2">
                                 <label htmlFor="description mb-3 mt-3">
                                     Describe tu Profesion
                                 </label>
@@ -125,6 +125,8 @@ export const About = () => {
                                     rows="5"
                                     value={aboutme?.description}
                                     onChange={handleOnchange}
+                                    className="textarea"
+                                    
                                 />
                         </div>
                       </div>
@@ -169,6 +171,6 @@ export const About = () => {
                     </div>
                 </form>
             </div>
-        </div>
+        </div> 
     );
 };
