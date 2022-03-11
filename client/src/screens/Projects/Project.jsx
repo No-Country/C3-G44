@@ -44,7 +44,7 @@ export const Project = ({ project, number, user, token, loadData }) => {
             <form
                 action=""
                 onSubmit={handleSubmit}
-                className="d-flex justify-content-end col-md-10 mb-4"
+                className="d-flex justify-content-end mb-4"
             >
                 <div className="row ">
                     <div className="row px-4">
@@ -120,6 +120,7 @@ export const Project = ({ project, number, user, token, loadData }) => {
                             />
                         </div>
                     </div>
+                    <div className='d-flex justify-content-around'>
                     <button
                         type="button"
                         className="btn-upload col-sm-4 text-center"
@@ -133,6 +134,8 @@ export const Project = ({ project, number, user, token, loadData }) => {
                     >
                         Guardar
                     </button>
+                    </div>
+                    
                 </div>
             </form>
         </>

@@ -55,7 +55,7 @@ export const Projects = () => {
                         loadData={() => loadData()}
                     />
                 ))}
-
+                <div className='d-flex justify-content-center'>
                 <button
                     type="button"
                     className="btn-upload col-sm-4 text-center mb-5"
@@ -63,6 +63,8 @@ export const Projects = () => {
                 >
                     Agregar otro proyecto
                 </button>
+                </div>
+                
             </div>
         </div>
     );
