@@ -1,0 +1,110 @@
+#container-register {
+    background-image: url(../../assets/img/im1.png ) ;
+    background-size: cover ;
+    background-position: top center ;
+    border: 5px solid #000000 ;
+    border-radius: 25px ;
+    box-shadow: 0px 10px 10px 1px rgba(112, 111, 111, 0.2);
+    height: auto ;
+    margin-top: 30px !important ;
+    max-width: 40% ;
+    position: relative ;
+    z-index: 1 ;
+}
+
+#container-register h1 {
+    margin-top: 10px ;
+    margin-bottom: 5px ;
+    font-family: 'Montserrat', sans-serif ;
+    font-size: 20px ;
+    max-width: 90% ;
+}
+
+#container-register label {
+    font-size: 15px ;
+    margin-top: 10px ;
+    margin-bottom: -30px ;
+    max-width: 90% ;
+
+
+}
+
+#container-register input {
+    display: flex ;
+    border-style: none ;
+    border-bottom: 5px solid #000000 ;
+    color: #000000 ;
+    background-color: transparent;
+    max-height: 30px ;
+    max-width: 90% ;
+}
+
+#container-register p{
+    color: #000000;
+}
+
+#container-register .image{
+    display: inline-block;
+    height: 10px;
+    width: 20px;
+    position: fixed;
+}
+
+#container-register img{
+    display: inline-block;
+    filter: brightness(0);
+    max-height: 15%;
+    max-width: 15%;
+    margin-bottom: -30px;
+}
+
+#container-register img:hover{
+    cursor: pointer;
+    transform: scale(1.1)
+}
+
+#container-register button {
+    display: flex ;
+    justify-content: center ;
+    color: #000000 ;
+    border-radius: 50px ;
+    font-size: 15px ;
+    max-height: 80px ;
+    width: auto ;
+}
+
+#container-register button:hover{
+    color: #ffffff;
+}
+
+#container-register button:disabled, button[disabled] {
+
+background-color: grey;
+}
+
+#container-register .logo{
+    display: inline-block;
+    filter: brightness(1);
+    max-height: 20%;
+    max-width: 20%;
+}
+
+#container-register .logo:hover{
+        cursor: default;
+    transform: scale(1)
+}
+
+@media only screen and (min-width: 768px) {
+
+    #labelPassword {
+        margin-right: -0.2rem ;
+    }
+}
+
+
+@media only screen and (min-width: 425px) {
+
+    #labelPassword {
+        margin-right: 4rem;
+    }
+}
