@@ -18,6 +18,18 @@ export const Service = () => {
         general: '',
     });
 
+
+    const loadData = async (_id, tokens) => {
+        const dataResponse = await loadDataUser(_id, tokens);
+        const { user } = dataResponse;
+        setServices(
+            user.service ?? {
+                general: '',
+                service1: { title: '', description: '' },
+            }
+        );
+    };
+
     const handleAddPuesto = () => {
         const service = {};
         service['service' + Object.keys(services).length] = {
@@ -28,10 +40,21 @@ export const Service = () => {
     };
 
     const handleDeletePuesto = (e) => {
+        const serv = { service: {} };
         const newServices = services;
-        delete newServices[`service${e+1}`];
-        console.log(newServices);
-        setServices(newServices);
+        delete newServices[`service${e + 1}`];
+        Object.values(newServices).map((element, i) =>
+            i === 0
+                ? (serv.service['general'] = element)
+                : (serv.service[`service${i}`] = element)
+        );
+        setServices({
+                general: '',
+                service1: { title: '', description: '' },
+            }
+        );
+        updateUser(user, token, null, null, serv, null);
+        loadData(user, token);
     }
 
     const handleChange = (e) => {
@@ -63,16 +86,7 @@ export const Service = () => {
         loadData(user, token);
     };
 
-    const loadData = async (_id, tokens) => {
-        const dataResponse = await loadDataUser(_id, tokens);
-        const { user } = dataResponse;
-        setServices(
-            user.service ?? {
-                general: '',
-                service1: { title: '', description: '' },
-            }
-        );
-    };
+    
 
     useEffect(() => {
         loadData(user, token);
@@ -123,7 +137,7 @@ export const Service = () => {
                     </button>
                 </div>
                 <div className=" col-md-10 d-flex justify-content-center mb-5">
-                    <button className="btn-upload px-5 py-3">Subir</button>
+                    <button className="btn-upload px-5 py-3">Guardar</button>
                 </div>
             </form>
         </div>

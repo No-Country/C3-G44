@@ -15,7 +15,7 @@ import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 export const Home = () => {
     const navigate = useNavigate();
     const { dispatchUser } = useContext(UserContext);
-    const { height, width } = useWindowDimensions();
+    const { width } = useWindowDimensions();
 
     const [links, setLinks] = useState([]);
     const [toggle, setToggle] = useState(false);

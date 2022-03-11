@@ -81,7 +81,7 @@ export const Puesto = ({ service, number, handleDeletePuesto }) => {
                     type="button"
                     onClick={ () => handleDeletePuesto(number)}
                 >
-                    Eliminar puesto
+                    Eliminar
                 </button>
             </div>
         </div>
