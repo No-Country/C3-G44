@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const Puesto = ({ service, number }) => {
+export const Puesto = ({ service, number, handleDeletePuesto }) => {
     const [job, setJob] = useState({ ...service });
 
     const handleChange = (e) => {
@@ -41,13 +41,25 @@ export const Puesto = ({ service, number }) => {
                     <label htmlFor="" className="small-lavel">
                         Desde
                     </label>
-                    <input type="date" name="dateinit" className="mx-5" value={job?.dateinit} onChange={handleChange} />
+                    <input
+                        type="date"
+                        name="dateinit"
+                        className="mx-5"
+                        value={job?.dateinit}
+                        onChange={handleChange}
+                    />
                 </div>
                 <div className="col-md-4 mt-4">
                     <label htmlFor="" className="small-lavel">
                         Hasta
                     </label>
-                    <input type="date" name="datefinish" className="mx-5" value={job?.datefinish} onChange={handleChange}/>
+                    <input
+                        type="date"
+                        name="datefinish"
+                        className="mx-5"
+                        value={job?.datefinish}
+                        onChange={handleChange}
+                    />
                 </div>
             </div>
             <div className="col-12 mb-5 d-flex flex-column">
@@ -62,6 +74,15 @@ export const Puesto = ({ service, number }) => {
                     value={job.description}
                     onChange={handleChange}
                 />
+            </div>
+            <div className="col-md-10 d-flex mb-5">
+                <button
+                    className="button-transparent px-4 py-3"
+                    type="button"
+                    onClick={ () => handleDeletePuesto(number)}
+                >
+                    Eliminar
+                </button>
             </div>
         </div>
     );

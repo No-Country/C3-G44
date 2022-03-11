@@ -4,6 +4,7 @@ import './index.css';
 import App from './App.jsx';
 import Axios from 'axios'
 import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 Axios.defaults.baseURL = 'https://coderporfolioserver.herokuapp.com/';
 
@@ -14,4 +15,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+serviceWorkerRegistration.register();
 reportWebVitals();

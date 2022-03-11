@@ -10,10 +10,12 @@ import { Service } from '../Service/Service';
 import './Home.css';
 
 import logo from '../../assets/img/fondo.png';
+import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 
 export const Home = () => {
     const navigate = useNavigate();
     const { dispatchUser } = useContext(UserContext);
+    const { width } = useWindowDimensions();
 
     const [links, setLinks] = useState([]);
     const [toggle, setToggle] = useState(false);
@@ -47,7 +49,7 @@ export const Home = () => {
             style={tabPanel === null ? { backgroundImage: `url(${logo})` }: {}}
         >
             <div className="container-home  ">
-                <div className={toggle ? 'navigation active' : 'navigation'}>
+                <div className={toggle ? 'navigation active' : 'navigation'} style={width < 700 && toggle === false ? {display: 'none'}: {}} >
                     <ul>
                         <li>
                             <a href="##" onClick={() => handleTabPanel(null)}>
@@ -166,7 +168,7 @@ export const Home = () => {
                     </ul>
                 </div>
                 {/* <!-- main --> */}
-                <div className={toggle ? 'main active' : 'main'}>
+                <div id="hamburger-icon" className={toggle ? 'main active' : 'main'}>
                     <div className="topbar">
                         <div className="toggle" onClick={handleToggle}>
                             <img
