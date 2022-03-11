@@ -7,6 +7,7 @@ import logo from '../../assets/img/logo_coder.png';
 
 import './Service.css';
 
+
 export const Service = () => {
     const { stateUser } = useContext(UserContext);
     const { user } = stateUser;
@@ -25,6 +26,13 @@ export const Service = () => {
         };
         setServices({ ...services, ...service });
     };
+
+    const handleDeletePuesto = (e) => {
+        const newServices = services;
+        delete newServices[`service${e+1}`];
+        console.log(newServices);
+        setServices(newServices);
+    }
 
     const handleChange = (e) => {
         setServices({ ...services, [e.target.name]: e.target.value });
@@ -70,6 +78,7 @@ export const Service = () => {
         loadData(user, token);
     }, [user, token]);
 
+    
     return (
         <div
             id="service"
@@ -97,7 +106,12 @@ export const Service = () => {
                 {Object.values(services)
                     .filter((element) => typeof element === 'object')
                     .map((service, index) => (
-                        <Puesto key={index} service={service} number={index} />
+                        <Puesto
+                            key={index}
+                            service={service}
+                            number={index}
+                            handleDeletePuesto={(e) => handleDeletePuesto(e)}
+                        />
                     ))}
                 <div className="col-md-10 d-flex justify-content-center mb-5">
                     <button
