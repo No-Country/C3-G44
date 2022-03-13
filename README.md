@@ -9,6 +9,8 @@ Front End con React, uso de context y reducers para manejo de estado compartido.
 Página web desplegada en Heroku https://coderporfolio.herokuapp.com 
 
 Karina Korn Front end developer https://github.com/karinakorn
+
 Dante Fontana UX/UI https://github.com/maurifl
+
 Jorge Velásquez Full Stack https://github.com/jorgevelasquezv
 
